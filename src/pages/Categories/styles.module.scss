@@ -7,21 +7,21 @@
   .wrapper {
     padding: 16px 8px;
     display: grid;
-    max-width: 420px;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 12px;
     row-gap: 24px;
+    width: 100%;
     .item {
       position: relative;
       .count {
         position: absolute;
         top: 0;
         right: 6px;
-        background: #fcde1d;
+        background: #f4d408;
         color: #fff;
-        min-width: 24px;
-        height: 24px;
-        line-height: 24px;
+        min-width: 20px;
+        height: 20px;
+        line-height: 20px;
         vertical-align: middle;
         text-align: center;
         border-radius: 50%;
@@ -42,7 +42,7 @@
         vertical-align: middle;
         margin-bottom: 2px;
         path {
-          // fill: red;
+          fill: var(--tg-theme-text-color);
         }
       }
     }
@@ -55,11 +55,13 @@
     .text {
       text-align: center;
       margin-bottom: 8px;
+      font-size: 14px;
       color: var(--tg-theme-text-color);
       .title {
-        font-style: 12px;
+        white-space: nowrap;
       }
       .price {
+        white-space: nowrap;
         font-weight: 600;
       }
     }
