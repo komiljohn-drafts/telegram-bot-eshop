@@ -1,0 +1,66 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  .wrapper {
+    padding: 16px 8px;
+    display: grid;
+    max-width: 420px;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 12px;
+    row-gap: 24px;
+    .item {
+      position: relative;
+      .count {
+        position: absolute;
+        top: 0;
+        right: 6px;
+        background: #fcde1d;
+        color: #fff;
+        min-width: 24px;
+        height: 24px;
+        line-height: 24px;
+        vertical-align: middle;
+        text-align: center;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: 600;
+      }
+    }
+    .buttons {
+      display: flex;
+      gap: 4px;
+      width: 70%;
+      margin-inline: auto;
+      justify-content: center;
+      .action_icon {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: middle;
+        margin-bottom: 2px;
+        path {
+          // fill: red;
+        }
+      }
+    }
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .text {
+      text-align: center;
+      margin-bottom: 8px;
+      .title {
+        font-style: 12px;
+      }
+      .price {
+        font-weight: 600;
+      }
+    }
+  }
+}

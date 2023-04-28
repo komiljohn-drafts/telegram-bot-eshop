@@ -1,0 +1,29 @@
+.button {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 6px 0;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-inline: auto;
+  cursor: pointer;
+  transition: 0.3s ease;
+  user-select: none;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 14px;
+  vertical-align: middle;
+  &.medium {
+    line-height: 20px;
+  }
+  &.large {
+    height: 40px;
+    font-weight: 400;
+    line-height: 40px;
+  }
+  //   &:focus,
+  //   &:hover,
+  //   &:active,
+  //   &:visited {
+  //     background-color: #fcde1d !important;
+  //   }
+}
