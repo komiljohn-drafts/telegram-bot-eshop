@@ -24,7 +24,7 @@ export default function Orders(props) {
     tg.setHeaderColor(tg.themeParams.secondary_bg_color);
     tg.setBackgroundColor(tg.themeParams.secondary_bg_color);
     tg.MainButton.show();
-    tg.showAlert(tg.themeParams);
+    tg.showAlert(JSON.stringify(tg.themeParams));
     tg.BackButton.show();
   }, [tg, categories, orders]);
 
