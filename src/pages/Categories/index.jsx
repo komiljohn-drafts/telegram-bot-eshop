@@ -29,7 +29,7 @@ export default function Categories(props) {
 
   return (
     <div className={cls.main}>
-      <p onClick={() => setShowOrder(true)}>ACTION</p>
+      {/* <p onClick={() => setShowOrder(true)}>ACTION</p> */}
       <div className={cls.wrapper}>
         {categories.map((item) => (
           <div className={cls.item} key={item.id}>

@@ -17,7 +17,7 @@ export default function PrimaryButton({
       className={`${cls.button} ${cls[size]}`}
       style={{
         backgroundColor: colors[bgColor],
-        width: fullWidth ? "100%" : "70%",
+        width: fullWidth ? "100%" : "",
         borderRadius: rounded ? "6px" : "0",
       }}
       {...props}

@@ -3,7 +3,6 @@ import { FoodIcon, MinusIcon, PlusIcon } from "../../assets/icons.jsx";
 import cls from "./styles.module.scss";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import useCategoriesStore from "../../store/categories";
-import { fakeData } from "../Categories/fakeData.jsx";
 import formatNumbers from "../../utils/formatNumbers.js";
 import useTelegram from "../../hooks/useTelegram.js";
 
@@ -11,7 +10,7 @@ export default function Orders(props) {
   const { setShowOrder } = props;
   const tg = useTelegram();
 
-  const { categories, addToCard, addCategories } = useCategoriesStore((state) => state);
+  const { categories, addToCard } = useCategoriesStore((state) => state);
 
   const orders = useMemo(() => {
     return categories.filter((i) => i.count);
@@ -21,6 +20,8 @@ export default function Orders(props) {
     tg.MainButton.text = `TO'LOV QILISH - ${formatNumbers(
       orders.reduce((acc, cur) => acc + cur.count * cur.price, 0)
     )} so'm`;
+    tg.setHeaderColor(tg.themeParams.secondary_bg_color);
+    tg.setBackgroundColor(tg.themeParams.secondary_bg_color);
     tg.MainButton.show();
 
     tg.BackButton.show();

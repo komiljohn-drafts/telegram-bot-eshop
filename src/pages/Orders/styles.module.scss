@@ -1,6 +1,8 @@
 .wrapper {
+  margin: 16px;
   padding: 16px;
-  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: 6px;
+  background-color: var(--tg-theme-bg-color);
 
   .bigTitle {
     margin-bottom: 10px;
@@ -22,6 +24,7 @@
       align-items: center;
       gap: 12px;
       .text {
+        user-select: none;
         color: var(--tg-theme-text-color);
         p:first-child {
           font-weight: 600;
@@ -36,10 +39,14 @@
       }
     }
     .right {
+      p {
+        color: var(--tg-theme-text-color);
+      }
       .buttons {
         margin-top: 4px;
         display: flex;
         gap: 4px;
+        justify-content: end;
         .action_icon {
           width: 8px;
           height: 8px;
