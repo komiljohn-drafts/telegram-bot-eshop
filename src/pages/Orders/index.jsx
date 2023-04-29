@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo } from "react";
+
 import { FoodIcon, MinusIcon, PlusIcon } from "../../assets/icons.jsx";
-import cls from "./styles.module.scss";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import useCategoriesStore from "../../store/categories";
 import formatNumbers from "../../utils/formatNumbers.js";
 import useTelegram from "../../hooks/useTelegram.js";
+import cls from "./styles.module.scss";
 
 export default function Orders(props) {
   const { setShowOrder } = props;
@@ -17,13 +18,13 @@ export default function Orders(props) {
   }, [categories]);
 
   useEffect(() => {
-    tg.MainButton.text = `TO'LOV QILISH - ${formatNumbers(
+    tg.MainButton.text = `TO'LOVGA O'TISH - ${formatNumbers(
       orders.reduce((acc, cur) => acc + cur.count * cur.price, 0)
     )} so'm`;
     tg.setHeaderColor(tg.themeParams.secondary_bg_color);
     tg.setBackgroundColor(tg.themeParams.secondary_bg_color);
     tg.MainButton.show();
-
+    tg.showAlert(tg.themeParams);
     tg.BackButton.show();
   }, [tg, categories, orders]);
 

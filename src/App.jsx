@@ -12,9 +12,7 @@ function App() {
 
   const [showOrder, setShowOrder] = useState(false);
 
-  tg.onEvent("backButtonClicked", () => tg.showAlert("New message"));
-
-  return <div>{showOrder ? <Orders /> : <Categories setShowOrder={setShowOrder} />}</div>;
+  return <div>{showOrder ? <Orders setShowOrder={setShowOrder} /> : <Categories setShowOrder={setShowOrder} />}</div>;
 }
 
 export default App;

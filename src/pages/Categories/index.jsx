@@ -18,7 +18,7 @@ export default function Categories(props) {
 
   useEffect(() => {
     if (categories.some((i) => i.count)) {
-      tg.MainButton.text = "Buyurtmaga o'tish";
+      tg.MainButton.text = "BUYURTMAGA O'TISH";
       tg.MainButton.show();
     } else if (tg.MainButton.isVisible) {
       tg.MainButton.hide();
