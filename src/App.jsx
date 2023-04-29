@@ -10,6 +10,8 @@ function App() {
     tg.MainButton.textColor = "#fff";
   }, []);
 
+  // console.log(tg.themeParams);
+
   const [showOrder, setShowOrder] = useState(false);
 
   return <div>{showOrder ? <Orders setShowOrder={setShowOrder} /> : <Categories setShowOrder={setShowOrder} />}</div>;
