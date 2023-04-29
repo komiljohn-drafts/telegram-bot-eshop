@@ -1,24 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Categories from "./pages/Categories";
+import Orders from "./pages/Orders";
 
 function App() {
   const tg = window.Telegram.WebApp;
   useEffect(() => {
     tg.ready();
+    tg.MainButton.color = "#33b648";
+    tg.MainButton.textColor = "#fff";
   }, []);
 
-  const handleClose = () => {
-    tg.close();
-  };
+  const [showOrder, setShowOrder] = useState(false);
 
-  // console.log("window telegram webapp => ", window.Telegram.WebApp);
-
-  return (
-    <div>
-      <Categories />
-      <div onClick={handleClose}>Close</div>
-    </div>
-  );
+  return <div>{showOrder ? <Orders /> : <Categories setShowOrder={setShowOrder} />}</div>;
 }
 
 export default App;

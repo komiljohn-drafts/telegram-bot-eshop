@@ -1,0 +1,56 @@
+.wrapper {
+  padding: 16px;
+  background-color: var(--tg-theme-secondary-bg-color);
+
+  .bigTitle {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    padding: 8px 0;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--tg-theme-text-color);
+  }
+  .order {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &:not(&:last-child) {
+      margin-bottom: 12px;
+    }
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      .text {
+        color: var(--tg-theme-text-color);
+        p:first-child {
+          font-weight: 600;
+          .count {
+            color: #faa81d;
+            margin-left: 4px;
+          }
+        }
+        .hint {
+          color: var(--tg-theme-hint-color);
+        }
+      }
+    }
+    .right {
+      .buttons {
+        margin-top: 4px;
+        display: flex;
+        gap: 4px;
+        .action_icon {
+          width: 8px;
+          height: 8px;
+          line-height: 8px;
+          vertical-align: middle;
+          margin-bottom: 2px;
+          path {
+            fill: var(--tg-theme-text-color);
+          }
+        }
+      }
+    }
+  }
+}

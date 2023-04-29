@@ -2,7 +2,6 @@
   text-transform: uppercase;
   text-align: center;
   padding: 6px 0;
-  border-radius: 6px;
   font-weight: 600;
   margin-inline: auto;
   cursor: pointer;
@@ -19,6 +18,10 @@
     height: 40px;
     font-weight: 400;
     line-height: 40px;
+  }
+  &.small {
+    // padding: 4px;
+    line-height: 12px;
   }
   //   &:focus,
   //   &:hover,
