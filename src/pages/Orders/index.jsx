@@ -21,11 +21,10 @@ export default function Orders(props) {
     tg.MainButton.text = `TO'LOVGA O'TISH - ${formatNumbers(
       orders.reduce((acc, cur) => acc + cur.count * cur.price, 0)
     )} so'm`;
+    tg.MainButton.show();
+    tg.BackButton.show();
     tg.setHeaderColor("secondary_bg_color");
     tg.setBackgroundColor("bg_color");
-    tg.MainButton.show();
-    tg.showAlert(JSON.stringify(tg.themeParams));
-    tg.BackButton.show();
   }, [tg, categories, orders]);
 
   tg.onEvent("backButtonClicked", () => setShowOrder(false));
