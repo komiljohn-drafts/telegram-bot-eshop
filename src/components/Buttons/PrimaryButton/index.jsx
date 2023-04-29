@@ -8,17 +8,18 @@ export default function PrimaryButton({
   rounded = true,
   fullWidth,
   children,
+  classes = "",
   ...props
 }) {
   const colors = { yellow: "#faa81d", red: "#e74d46", green: "#33b648" };
 
   return (
     <div
-      className={`${cls.button} ${cls[size]}`}
+      className={`${cls.button} ${cls[size]} ${classes}`}
       style={{
         backgroundColor: colors[bgColor],
         width: fullWidth ? "100%" : "",
-        borderRadius: rounded ? "6px" : "0",
+        borderRadius: rounded ? "7px" : "0",
       }}
       {...props}
     >

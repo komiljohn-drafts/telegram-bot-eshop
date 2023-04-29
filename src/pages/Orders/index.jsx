@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo } from "react";
 
-import { FoodIcon, MinusIcon, PlusIcon } from "../../assets/icons.jsx";
-import PrimaryButton from "../../components/Buttons/PrimaryButton";
+import { FoodIcon } from "../../assets/icons.jsx";
 import useCategoriesStore from "../../store/categories";
 import formatNumbers from "../../utils/formatNumbers.js";
 import useTelegram from "../../hooks/useTelegram.js";
 import cls from "./styles.module.scss";
+import PlusButton from "../../components/Buttons/PlusButton/index.jsx";
+import MinusButton from "../../components/Buttons/MinusButton/index.jsx";
 
 export default function Orders(props) {
-  const { setShowOrder } = props;
+  const { setCurrentPage } = props;
   const tg = useTelegram();
 
   const { categories, addToCard } = useCategoriesStore((state) => state);
@@ -24,10 +25,11 @@ export default function Orders(props) {
     tg.MainButton.show();
     tg.BackButton.show();
     tg.setHeaderColor("secondary_bg_color");
-    tg.setBackgroundColor("bg_color");
+    tg.setBackgroundColor("secondary_bg_color");
   }, [tg, categories, orders]);
 
-  tg.onEvent("backButtonClicked", () => setShowOrder(false));
+  tg.onEvent("backButtonClicked", () => setCurrentPage("main"));
+  tg.onEvent("mainButtonClicked", () => setCurrentPage("payment"));
 
   return (
     <div className={cls.wrapper}>
@@ -49,12 +51,8 @@ export default function Orders(props) {
           <div className={cls.right}>
             <p>{formatNumbers(order.count * order.price)} so&apos;m</p>
             <div className={cls.buttons}>
-              <PrimaryButton size="small" bgColor="red" onClick={() => addToCard(order.id, "minus")}>
-                <MinusIcon className={cls.action_icon} />
-              </PrimaryButton>
-              <PrimaryButton size="small" onClick={() => addToCard(order.id, "plus")}>
-                <PlusIcon className={cls.action_icon} />
-              </PrimaryButton>
+              <MinusButton onClick={() => addToCard(order.id, "minus")} />
+              <PlusButton onClick={() => addToCard(order.id, "plus")} />
             </div>
           </div>
         </div>

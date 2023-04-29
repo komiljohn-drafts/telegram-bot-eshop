@@ -1,23 +1,20 @@
 .button {
+  box-sizing: border-box;
   text-transform: uppercase;
   text-align: center;
-  padding: 6px 0;
-  font-weight: 600;
+  padding: 6px 16px;
+  font-weight: 700;
   cursor: pointer;
   transition: 0.3s ease;
   user-select: none;
   white-space: nowrap;
-  color: var(--tg-theme-button-text-color);
-  font-size: 14px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 18px;
   vertical-align: middle;
   &.medium {
-    line-height: 20px;
     margin-inline: auto;
-    width: 70%;
-  }
-  &.small {
-    line-height: 12px;
-    width: 30px;
+    width: 80px !important;
   }
   //   &:focus,
   //   &:hover,
@@ -26,3 +23,4 @@
   //     background-color: #fcde1d !important;
   //   }
 }
+// e74d46

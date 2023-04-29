@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
+
 import { fakeData } from "./fakeData";
-import { FoodIcon, MinusIcon, PlusIcon } from "../../assets/icons.jsx";
+import { FoodIcon } from "../../assets/icons.jsx";
 import cls from "./styles.module.scss";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import useCategoriesStore from "../../store/categories";
 import useTelegram from "../../hooks/useTelegram";
+import PlusButton from "../../components/Buttons/PlusButton";
+import MinusButton from "../../components/Buttons/MinusButton";
+import formatNumbers from "../../utils/formatNumbers";
 
 export default function Categories(props) {
-  const { setShowOrder } = props;
+  const { setCurrentPage } = props;
 
   const { categories, addToCard, addCategories } = useCategoriesStore((state) => state);
   const tg = useTelegram();
@@ -25,11 +29,10 @@ export default function Categories(props) {
     }
   }, [tg, categories]);
 
-  tg.onEvent("mainButtonClicked", () => setShowOrder(true));
+  tg.onEvent("mainButtonClicked", () => setCurrentPage("orders"));
 
   return (
     <div className={cls.main}>
-      {/* <p onClick={() => setShowOrder(true)}>ACTION</p> */}
       <div className={cls.wrapper}>
         {categories.map((item) => (
           <div className={cls.item} key={item.id}>
@@ -37,19 +40,14 @@ export default function Categories(props) {
             <div className={cls.icon}>
               <FoodIcon />
             </div>
-            <p className={cls.text}>
-              <span className={cls.title}>{item.title}</span>
-              {" - "}
-              <span className={cls.price}>{item.price}s</span>
-            </p>
+            <div className={cls.text}>
+              <p className={cls.title}>{item.title}</p>
+              <p className={cls.price}>{formatNumbers(item.price)} so&apos;m</p>
+            </div>
             {item.count ? (
               <div className={cls.buttons}>
-                <PrimaryButton bgColor="red" onClick={() => addToCard(item.id, "minus")}>
-                  <MinusIcon className={cls.action_icon} />
-                </PrimaryButton>
-                <PrimaryButton onClick={() => addToCard(item.id, "plus")}>
-                  <PlusIcon className={cls.action_icon} />
-                </PrimaryButton>
+                <MinusButton onClick={() => addToCard(item.id, "minus")} />
+                <PlusButton onClick={() => addToCard(item.id, "plus")} />
               </div>
             ) : (
               <PrimaryButton onClick={() => addToCard(item.id, "plus")}>Add</PrimaryButton>

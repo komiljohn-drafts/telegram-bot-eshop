@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Categories from "./pages/Categories";
 import Orders from "./pages/Orders";
+import Payment from "./pages/Payment";
 
 function App() {
   const tg = window.Telegram.WebApp;
@@ -12,9 +13,21 @@ function App() {
 
   // console.log(tg.themeParams);
 
-  const [showOrder, setShowOrder] = useState(false);
+  const [currentPage, setCurrentPage] = useState("main");
 
-  return <div>{showOrder ? <Orders setShowOrder={setShowOrder} /> : <Categories setShowOrder={setShowOrder} />}</div>;
+  return (
+    <div>
+      {currentPage === "main" ? (
+        <Categories setCurrentPage={setCurrentPage} />
+      ) : currentPage === "orders" ? (
+        <Orders setCurrentPage={setCurrentPage} />
+      ) : currentPage === "payment" ? (
+        <Payment />
+      ) : (
+        <Categories setCurrentPage={setCurrentPage} />
+      )}
+    </div>
+  );
 }
 
 export default App;
