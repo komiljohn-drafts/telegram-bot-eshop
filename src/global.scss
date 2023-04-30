@@ -8,6 +8,10 @@ body {
   background-color: var(--tg-theme-bg-color);
 }
 
+body.order-mode {
+  background-color: var(--bg-color);
+}
+
 * {
   margin: 0;
   padding: 0;

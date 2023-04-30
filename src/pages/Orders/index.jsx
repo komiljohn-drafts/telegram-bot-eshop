@@ -4,13 +4,13 @@ import { FoodIcon } from "../../assets/icons.jsx";
 import useCategoriesStore from "../../store/categories";
 import formatNumbers from "../../utils/formatNumbers.js";
 import useTelegram from "../../hooks/useTelegram.js";
-import cls from "./styles.module.scss";
 import PlusButton from "../../components/Buttons/PlusButton/index.jsx";
 import MinusButton from "../../components/Buttons/MinusButton/index.jsx";
+import cls from "./styles.module.scss";
 
 export default function Orders(props) {
   const { setCurrentPage } = props;
-  const tg = useTelegram();
+  const { tg } = useTelegram();
 
   const { categories, addToCard } = useCategoriesStore((state) => state);
 
@@ -38,10 +38,10 @@ export default function Orders(props) {
         <div className={cls.order} key={order.id}>
           <div className={cls.left}>
             <div>
-              <FoodIcon />
+              <FoodIcon className={cls.icon} />
             </div>
             <div className={cls.text}>
-              <p>
+              <p className={cls.top}>
                 <span className={cls.title}>{order.title}</span>
                 <span className={cls.count}>{order.count}x</span>
               </p>

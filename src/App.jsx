@@ -13,7 +13,7 @@ function App() {
 
   // console.log(tg.themeParams);
 
-  const [currentPage, setCurrentPage] = useState("main");
+  const [currentPage, setCurrentPage] = useState("payment");
 
   return (
     <div>
@@ -22,7 +22,7 @@ function App() {
       ) : currentPage === "orders" ? (
         <Orders setCurrentPage={setCurrentPage} />
       ) : currentPage === "payment" ? (
-        <Payment />
+        <Payment setCurrentPage={setCurrentPage} />
       ) : (
         <Categories setCurrentPage={setCurrentPage} />
       )}

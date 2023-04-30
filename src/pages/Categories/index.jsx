@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { fakeData } from "./fakeData";
 import { FoodIcon } from "../../assets/icons.jsx";
-import cls from "./styles.module.scss";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import useCategoriesStore from "../../store/categories";
 import useTelegram from "../../hooks/useTelegram";
 import PlusButton from "../../components/Buttons/PlusButton";
 import MinusButton from "../../components/Buttons/MinusButton";
 import formatNumbers from "../../utils/formatNumbers";
+import cls from "./styles.module.scss";
 
 export default function Categories(props) {
   const { setCurrentPage } = props;
 
   const { categories, addToCard, addCategories } = useCategoriesStore((state) => state);
-  const tg = useTelegram();
+  const { tg } = useTelegram();
 
   useEffect(() => {
     addCategories(fakeData);
@@ -30,6 +30,7 @@ export default function Categories(props) {
   }, [tg, categories]);
 
   tg.onEvent("mainButtonClicked", () => setCurrentPage("orders"));
+  tg.onEvent("backButtonClicked", () => tg.close());
 
   return (
     <div className={cls.main}>

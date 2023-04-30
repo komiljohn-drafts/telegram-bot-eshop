@@ -6,11 +6,10 @@
   height: 100vh;
   position: relative;
   .wrapper {
-    padding: 16px;
     display: flex;
-    column-gap: 12px;
     max-width: 480px;
     margin-inline: auto;
+    justify-content: space-around;
     flex-wrap: wrap;
     .item {
       width: 120px;
