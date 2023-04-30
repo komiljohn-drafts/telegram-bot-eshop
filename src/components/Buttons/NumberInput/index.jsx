@@ -9,8 +9,8 @@ export default function NumberInput({ mask, label, form, name, required, placeho
         <div className={cls.label}>{label}</div>
         <InputMask
           // mask options
-          mask={mask}
           alwaysShowMask={false}
+          mask={mask}
           className={cls.input}
           // input options
           type={"text"}

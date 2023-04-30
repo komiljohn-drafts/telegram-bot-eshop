@@ -5,16 +5,18 @@ import Countdown from "react-countdown";
 import NumberInput from "../../components/Buttons/NumberInput";
 import useTelegram from "../../hooks/useTelegram";
 import cls from "./styles.module.scss";
+import TextInput from "../../components/Buttons/TextInput";
+import useCategoriesStore from "../../store/categories";
 
 export default function Payment(props) {
   const { setCurrentPage } = props;
-  const { tg } = useTelegram();
+  const { tg, queryId, user } = useTelegram();
   const form = useForm({ defaultValues: {} });
+  const { categories } = useCategoriesStore((state) => state);
 
   const [resendCode, setResendCode] = useState(false);
   const [phoneNumSent, setPhoneNumSent] = useState(false);
-
-  // console.log(first)
+  const [showCountDown, setShowCountDown] = useState(false);
 
   useEffect(() => {
     tg.MainButton.text = phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH";
@@ -25,14 +27,32 @@ export default function Payment(props) {
   const onSubmit = (values) => {
     if (phoneNumSent) {
       // to-do
+      setShowCountDown(false);
       console.log("values => ", values);
       console.log("tg info => ", tg.initDataUnsafe);
+
+      tg.sendData(
+        JSON.stringify({
+          categories,
+          user,
+          queryId,
+        })
+      );
+      // fetch("http://localhost:8000/register", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ registerData: values, categories }),
+      // });
     } else {
       setPhoneNumSent(true);
-
+      setShowCountDown(true);
       // to-do
     }
   };
+
+  console.log("showCountDown", showCountDown);
 
   tg.onEvent("mainButtonClicked", () => form.handleSubmit(onSubmit)());
   tg.onEvent("backButtonClicked", () => setCurrentPage("orders"));
@@ -55,12 +75,13 @@ export default function Payment(props) {
 
   return (
     <div className={cls.wrapper}>
-      {/* <div onClick={() => form.handleSubmit(onSubmit)()}>Submit`da endi</div> */}
+      <div onClick={() => form.handleSubmit(onSubmit)()}>Submit`da endi</div>
       <p className={cls.title}>{phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH"}</p>
       <div className={cls.form}>
+        <TextInput placeholder="Ismingizni kiriting" label="Ism" form={form} name="first_name" required />
         <NumberInput
           mask={"+998 99 999-99-99"}
-          placeholer="+998 99 999-99-99"
+          placeholder="+998 99 999-99-99"
           label="Telefon"
           form={form}
           name="phone_number"
@@ -68,8 +89,8 @@ export default function Payment(props) {
         />
         {phoneNumSent && (
           <>
-            <NumberInput placeholer="0000" mask={"9999"} label="Kod" form={form} name="otp_code" required />
-            <Countdown key={resendCode} renderer={timerRenderer} date={Date.now() + 5000} />
+            <NumberInput placeholer="0000" mask={"9999"} label="Kod" form={form} name="otp_code" />
+            {showCountDown && <Countdown key={resendCode} renderer={timerRenderer} date={Date.now() + 5000} />}
           </>
         )}
       </div>
