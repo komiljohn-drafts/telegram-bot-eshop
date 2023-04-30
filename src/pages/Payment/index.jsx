@@ -20,6 +20,7 @@ export default function Payment(props) {
     tg.setHeaderColor("secondary_bg_color");
     tg.MainButton.text = "RO'YXATDAN O'TISH";
     tg.MainButton.show();
+    tg.BackButton.show();
   }, [tg]);
 
   const onSubmit = (values) => {
