@@ -17,11 +17,10 @@ export default function Payment(props) {
   // console.log(first)
 
   useEffect(() => {
-    tg.setHeaderColor("secondary_bg_color");
-    tg.MainButton.text = "RO'YXATDAN O'TISH";
+    tg.MainButton.text = phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH";
     tg.MainButton.show();
     tg.BackButton.show();
-  }, [tg]);
+  }, [tg, phoneNumSent]);
 
   const onSubmit = (values) => {
     if (phoneNumSent) {
@@ -35,7 +34,7 @@ export default function Payment(props) {
     }
   };
 
-  tg.onEvent("mainButtonClicked", () => form.handleSubmit(onSubmit));
+  tg.onEvent("mainButtonClicked", () => form.handleSubmit(onSubmit)());
   tg.onEvent("backButtonClicked", () => setCurrentPage("orders"));
 
   const doubleTime = (str) => (String(str).length === 1 ? `0${str}` : str);
@@ -56,7 +55,7 @@ export default function Payment(props) {
 
   return (
     <div className={cls.wrapper}>
-      {/* <div onClick={() => form.handleSubmit(onSubmit)()}>1lkj1l4jl321j4</div> */}
+      {/* <div onClick={() => form.handleSubmit(onSubmit)()}>Submit`da endi</div> */}
       <p className={cls.title}>{phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH"}</p>
       <div className={cls.form}>
         <NumberInput
