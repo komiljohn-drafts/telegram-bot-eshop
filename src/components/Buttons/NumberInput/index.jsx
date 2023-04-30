@@ -11,7 +11,6 @@ export default function NumberInput({ mask, label, form, name, required, placeho
         mask={mask}
         alwaysShowMask={false}
         className={cls.input}
-        maskPlaceholder="_"
         // input options
         type={"text"}
         placeholder={placeholder}

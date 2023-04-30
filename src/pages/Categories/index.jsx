@@ -30,7 +30,7 @@ export default function Categories(props) {
   }, [tg, categories]);
 
   tg.onEvent("mainButtonClicked", () => setCurrentPage("orders"));
-  tg.onEvent("backButtonClicked", () => tg.close());
+  // tg.onEvent("backButtonClicked", () => tg.close());
 
   return (
     <div className={cls.main}>

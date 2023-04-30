@@ -11,7 +11,8 @@ export default function Payment(props) {
   const { tg } = useTelegram();
   const form = useForm({ defaultValues: {} });
 
-  const [otpSent, setOtpSent] = useState(false);
+  const [resendCode, setResendCode] = useState(false);
+  const [phoneNumSent, setPhoneNumSent] = useState(false);
 
   // console.log(first)
 
@@ -21,18 +22,19 @@ export default function Payment(props) {
     tg.MainButton.show();
   }, [tg]);
 
-  const handleSubmit = (values) => {
-    if (otpSent) {
+  const onSubmit = (values) => {
+    if (phoneNumSent) {
       // to-do
       console.log("values => ", values);
       console.log("tg info => ", tg.initDataUnsafe);
     } else {
-      setOtpSent(true);
+      setPhoneNumSent(true);
+
       // to-do
     }
   };
 
-  tg.onEvent("mainButtonClicked", () => form.handleSubmit(handleSubmit));
+  tg.onEvent("mainButtonClicked", () => form.handleSubmit(onSubmit));
   tg.onEvent("backButtonClicked", () => setCurrentPage("orders"));
 
   const doubleTime = (str) => (String(str).length === 1 ? `0${str}` : str);
@@ -41,7 +43,7 @@ export default function Payment(props) {
     return (
       <p className={cls.countdown}>
         {completed ? (
-          <span>Qayta yuborish</span>
+          <span onClick={() => setResendCode((p) => !p)}>Qayta yuborish</span>
         ) : (
           <span>
             {doubleTime(minutes)}:{doubleTime(seconds)}
@@ -53,7 +55,8 @@ export default function Payment(props) {
 
   return (
     <div className={cls.wrapper}>
-      <p className={cls.title}>Ro&apos;yxatdan o&apos;tish</p>
+      {/* <div onClick={() => form.handleSubmit(onSubmit)()}>1lkj1l4jl321j4</div> */}
+      <p className={cls.title}>{phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH"}</p>
       <div className={cls.form}>
         <NumberInput
           mask={"+998 99 999-99-99"}
@@ -63,10 +66,10 @@ export default function Payment(props) {
           name="phone_number"
           required
         />
-        {otpSent && (
+        {phoneNumSent && (
           <>
             <NumberInput placeholer="0000" mask={"9999"} label="Kod" form={form} name="otp_code" required />
-            <Countdown renderer={timerRenderer} date={Date.now() + 10000}></Countdown>
+            <Countdown key={resendCode} renderer={timerRenderer} date={Date.now() + 5000} />
           </>
         )}
       </div>

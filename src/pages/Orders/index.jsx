@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { FoodIcon } from "../../assets/icons.jsx";
 import useCategoriesStore from "../../store/categories";
