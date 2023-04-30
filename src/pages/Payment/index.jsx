@@ -31,7 +31,7 @@ export default function Payment(props) {
       console.log("values => ", values);
       console.log("tg info => ", tg.initDataUnsafe);
 
-      fetch("http://localhost:8000/register", {
+      fetch("https://tubular-cocada-8aa0e4.netlify.app/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export default function Payment(props) {
 
   return (
     <div className={cls.wrapper}>
-      {/* <div onClick={() => form.handleSubmit(onSubmit)()}>Submit`da endi</div> */}
+      <div onClick={() => form.handleSubmit(onSubmit)()}>Submit`da endi</div>
       <p className={cls.title}>{phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH"}</p>
       <div className={cls.form}>
         <TextInput placeholder="Ismingizni kiriting" label="Ism" form={form} name="first_name" required />
