@@ -16,6 +16,7 @@ export default function Payment(props) {
   // console.log(first)
 
   useEffect(() => {
+    tg.setHeaderColor("secondary_bg_color");
     tg.MainButton.text = "RO'YXATDAN O'TISH";
     tg.MainButton.show();
   }, [tg]);
@@ -62,8 +63,12 @@ export default function Payment(props) {
           name="phone_number"
           required
         />
-        <NumberInput placeholer="0000" mask={"9999"} label="Kod" form={form} name="otp_code" required />
-        <Countdown renderer={timerRenderer} date={Date.now() + 1200}></Countdown>
+        {otpSent && (
+          <>
+            <NumberInput placeholer="0000" mask={"9999"} label="Kod" form={form} name="otp_code" required />
+            <Countdown renderer={timerRenderer} date={Date.now() + 10000}></Countdown>
+          </>
+        )}
       </div>
     </div>
   );

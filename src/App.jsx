@@ -9,11 +9,11 @@ function App() {
     tg.ready();
     tg.MainButton.color = "#33b648";
     tg.MainButton.textColor = "#fff";
-  }, []);
+  }, [tg]);
 
   // console.log(tg.themeParams);
 
-  const [currentPage, setCurrentPage] = useState("payment");
+  const [currentPage, setCurrentPage] = useState("main");
 
   return (
     <div>

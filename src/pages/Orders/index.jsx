@@ -24,8 +24,6 @@ export default function Orders(props) {
     )} so'm`;
     tg.MainButton.show();
     tg.BackButton.show();
-    tg.setHeaderColor("secondary_bg_color");
-    tg.setBackgroundColor("secondary_bg_color");
   }, [tg, categories, orders]);
 
   tg.onEvent("backButtonClicked", () => setCurrentPage("main"));

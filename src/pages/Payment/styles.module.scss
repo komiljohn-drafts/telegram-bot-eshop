@@ -1,7 +1,7 @@
 .wrapper {
   height: 100vh;
   padding: 32px;
-  background-color: #ddd;
+  background-color: var(--tg-theme-bg-color);
   .title {
     font-size: 14px;
     line-height: 18px;
