@@ -35,6 +35,7 @@ export default function Payment(props) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({ registerData: values, categories, queryId }),
       });
