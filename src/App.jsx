@@ -13,7 +13,7 @@ function App() {
 
   // console.log(tg.themeParams);
 
-  const [currentPage, setCurrentPage] = useState("main");
+  const [currentPage, setCurrentPage] = useState("orders");
 
   return (
     <div>

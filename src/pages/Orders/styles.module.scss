@@ -1,13 +1,58 @@
 .wrapper {
   border-radius: 7px;
 
+  .requestsBlock {
+    margin-top: 14px;
+    textarea {
+      background-color: var(--tg-theme-bg-color);
+      color: var(--tg-theme-text-color);
+      outline: none;
+      padding: 12px 20px 13px;
+      width: 100%;
+      border: none;
+      font-size: 17px;
+      box-sizing: border-box;
+      line-height: 21px;
+      overflow-wrap: break-word;
+      font-family: "Open Sans", sans-serif;
+      &::placeholder {
+        color: var(--tg-theme-hint-color);
+        font-size: 17px;
+        line-height: 21px;
+      }
+    }
+    p {
+      font-size: 14px;
+      line-height: 18px;
+      padding: 10px 20px 24px;
+    }
+  }
   .bigTitle {
-    text-transform: uppercase;
-    font-weight: 800;
     padding: 21px 20px 14px;
-    font-size: 17px;
-    line-height: 21px;
-    color: var(--tg-theme-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btns {
+      display: flex;
+      gap: 4px;
+      p {
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .editBtn {
+        color: #33b648;
+      }
+      .addBtn {
+        color: #0096ff;
+      }
+    }
+    .title {
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 17px;
+      line-height: 21px;
+      color: var(--tg-theme-text-color);
+    }
   }
   .order {
     display: flex;

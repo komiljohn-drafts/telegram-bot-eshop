@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { FoodIcon } from "../../assets/icons.jsx";
 import useCategoriesStore from "../../store/categories";
@@ -13,6 +13,8 @@ export default function Orders(props) {
   const { tg } = useTelegram();
 
   const { categories, addToCard } = useCategoriesStore((state) => state);
+
+  const [showBtns, setShowBtns] = useState(false);
 
   const orders = useMemo(() => {
     return categories.filter((i) => i.count);
@@ -31,7 +33,17 @@ export default function Orders(props) {
 
   return (
     <div className={cls.wrapper}>
-      <div className={cls.bigTitle}>Sizning buyurtmangiz</div>
+      <div className={cls.bigTitle}>
+        <p className={cls.title}>Buyurtmangiz</p>
+        <div className={cls.btns}>
+          <p className={cls.editBtn} onClick={() => setShowBtns(true)}>
+            O&apos;zgartirish
+          </p>
+          <p className={cls.addBtn} onClick={() => setCurrentPage("main")}>
+            Qo&apos;shish
+          </p>
+        </div>
+      </div>
       {orders.map((order) => (
         <div className={cls.order} key={order.id}>
           <div className={cls.left}>
@@ -48,13 +60,19 @@ export default function Orders(props) {
           </div>
           <div className={cls.right}>
             <p>{formatNumbers(order.count * order.price)} so&apos;m</p>
-            <div className={cls.buttons}>
-              <MinusButton onClick={() => addToCard(order.id, "minus")} />
-              <PlusButton onClick={() => addToCard(order.id, "plus")} />
-            </div>
+            {showBtns && (
+              <div className={cls.buttons}>
+                <MinusButton onClick={() => addToCard(order.id, "minus")} />
+                <PlusButton onClick={() => addToCard(order.id, "plus")} />
+              </div>
+            )}
           </div>
         </div>
       ))}
+      <div className={cls.requestsBlock}>
+        <textarea rows={1} placeholder="Komment..." />
+        <p>Taklif, talab va shikoyatlar uchun</p>
+      </div>
     </div>
   );
 }
