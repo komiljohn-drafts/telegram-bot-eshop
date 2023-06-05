@@ -97,8 +97,10 @@
     gap: 10px;
     flex-wrap: wrap;
     .product {
+      border: 2px solid var(--tg-theme-hint-color);
       margin: 4px;
       border-radius: 8px;
+      border-bottom-right-radius: 32px;
       width: calc(50% - 14px);
       overflow: hidden;
       .image {
@@ -110,10 +112,7 @@
         }
       }
       .body {
-        border: 2px solid #eee;
         border-top: none;
-        border-bottom-left-radius: 11px;
-        border-bottom-right-radius: 32px;
         overflow: hidden;
         padding-left: 8px;
         .title {

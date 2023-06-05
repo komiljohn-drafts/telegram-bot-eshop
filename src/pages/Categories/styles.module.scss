@@ -5,7 +5,7 @@
   align-items: center;
   width: 100%;
   overflow-x: scroll;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--tg-theme-hint-color);
   position: sticky;
   top: 0;
   background-color: var(--tg-theme-bg-color);
@@ -18,9 +18,9 @@
     align-items: center;
     gap: 4px;
     &.active {
-      background-color: var(--tg-theme-bg-color);
-      border-top-right-radius: 20px;
-      border-bottom-left-radius: 20px;
+      background-color: var(--tg-theme-hint-color);
+      color: var(--tg-theme-bg-color);
+      border-radius: 8px;
     }
   }
 }
