@@ -5,6 +5,7 @@ const useCategoriesStore = create(
   persist(
     (set, get) => ({
       categories: [],
+      activeCategory: {},
       addToCard: (id, key) =>
         set({
           categories: get().categories.map((i) =>
@@ -15,6 +16,11 @@ const useCategoriesStore = create(
         set({
           categories: get().categories.length ? get().categories : [...arr],
         }),
+      setActiveCategory: (obj) => {
+        set({
+          activeCategory: obj,
+        });
+      },
     }),
     { name: "categories-storage" }
   )

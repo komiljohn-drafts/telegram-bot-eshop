@@ -1,8 +1,7 @@
 .button {
   box-sizing: border-box;
-  text-transform: uppercase;
   text-align: center;
-  padding: 6px 16px;
+  padding: 6px 30px;
   font-weight: 700;
   cursor: pointer;
   transition: 0.3s ease;
@@ -12,10 +11,8 @@
   font-size: 13px;
   line-height: 18px;
   vertical-align: middle;
-  &.medium {
-    margin-inline: auto;
-    width: 80px !important;
-  }
+  background-color: var(--main-color);
+  border-radius: 8px;
   //   &:focus,
   //   &:hover,
   //   &:active,

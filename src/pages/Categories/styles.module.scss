@@ -1,89 +1,26 @@
-.main {
+.categories {
+  padding: 8px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
   align-items: center;
-  height: 100vh;
-  position: relative;
-  .wrapper {
+  width: 100%;
+  overflow-x: scroll;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background-color: var(--tg-theme-bg-color);
+  z-index: 10;
+  .category {
+    color: var(--tg-theme-text-color);
+    text-align: center;
+    padding: 4px 8px;
     display: flex;
-    max-width: 480px;
-    margin-inline: auto;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    .item {
-      width: 120px;
-      height: 165px;
-      padding: 4px 5px 21px;
-      box-sizing: border-box;
-      text-align: center;
-      position: relative;
-      .count {
-        display: inline-block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: #faa81d;
-        color: #fff;
-        min-width: 22px;
-        height: 22px;
-        padding: 2px 6px;
-        margin: 4px 6px;
-        vertical-align: middle;
-        text-align: center;
-        border-radius: 11px;
-        pointer-events: none;
-        font-size: 14px;
-        line-height: 18px;
-        font-weight: 700;
-        box-sizing: border-box;
-        z-index: 3;
-      }
+    align-items: center;
+    gap: 4px;
+    &.active {
+      background-color: var(--tg-theme-bg-color);
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 20px;
     }
-    .buttons {
-      display: flex;
-      gap: 2px;
-      width: 70%;
-      margin-inline: auto;
-      justify-content: center;
-      .action_icon {
-        width: 16px;
-        height: 16px;
-        line-height: 16px;
-        vertical-align: middle;
-        margin-bottom: 2px;
-        path {
-          fill: var(--tg-theme-text-color);
-        }
-      }
-    }
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-    .text {
-      text-align: center;
-      margin-bottom: 10px;
-      font-size: 13px;
-      line-height: 16px;
-      font-weight: 500;
-      color: var(--tg-theme-text-color);
-      user-select: none;
-      -webkit-user-select: none;
-      .title {
-        white-space: nowrap;
-      }
-      .price {
-        white-space: nowrap;
-        font-weight: 600;
-      }
-    }
-  }
-  .footer_btn {
-    width: 100%;
-    position: sticky;
-    bottom: 0;
   }
 }
