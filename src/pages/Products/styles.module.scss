@@ -29,9 +29,8 @@
       .body {
         border-top: none;
         overflow: hidden;
-        padding-left: 8px;
+        padding: 8px;
         .title {
-          margin-top: 8px;
           color: var(--tg-theme-text-color);
         }
         .price {
@@ -41,18 +40,16 @@
         }
         .footer {
           margin-top: 20px;
-          .action {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            svg path {
-              fill: blue;
-            }
-            .count {
-              color: var(--tg-theme-text-color);
-              font-size: 18px;
-              margin: 0 4px;
-            }
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          svg path {
+            fill: blue;
+          }
+          .count {
+            color: var(--tg-theme-text-color);
+            font-size: 18px;
+            margin: 0 4px;
           }
         }
       }
