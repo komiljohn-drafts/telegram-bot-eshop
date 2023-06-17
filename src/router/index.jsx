@@ -1,5 +1,7 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Main from "../pages/Main";
+import Orders from "../pages/Orders";
+import Payment from "../pages/Payment";
 
 export default function Router() {
   return (
@@ -13,11 +15,10 @@ export default function Router() {
         }
       >
         <Route index element={<Main />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/payment" element={<Payment />} />
 
-        {/* Using path="*"" means "match anything", so this route
-                acts like a catch-all for URLs that we don't have explicit
-                routes for. */}
-        <Route path="*" element={<div>404 - Not found</div>} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
   );

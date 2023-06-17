@@ -1,24 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Minus, Plus } from "react-feather";
 
 import { FoodIcon } from "../../assets/icons.jsx";
-import useCategoriesStore from "../../store/categories";
 import formatNumbers from "../../utils/formatNumbers.js";
 import useTelegram from "../../hooks/useTelegram.js";
-import PlusButton from "../../components/Buttons/PlusButton/index.jsx";
-import MinusButton from "../../components/Buttons/MinusButton/index.jsx";
+import useProductsStore from "../../store/categories";
+import RectangeIconButton from "../../components/Buttons/RectangeIconButton/index.jsx";
 import cls from "./styles.module.scss";
 
-export default function Orders(props) {
-  const { setCurrentPage } = props;
+export default function Orders() {
   const { tg } = useTelegram();
+  const navigate = useNavigate();
 
-  const { categories, addToCard } = useCategoriesStore((state) => state);
+  const { products, addToCard } = useProductsStore((state) => state);
 
   const [showBtns, setShowBtns] = useState(false);
 
   const orders = useMemo(() => {
-    return categories.filter((i) => i.count);
-  }, [categories]);
+    return products.filter((i) => i.count);
+  }, [products]);
 
   useEffect(() => {
     tg.MainButton.text = `TO'LOVGA O'TISH - ${formatNumbers(
@@ -26,23 +27,22 @@ export default function Orders(props) {
     )} so'm`;
     tg.MainButton.show();
     tg.BackButton.show();
-  }, [tg, categories, orders]);
+  }, [tg, products, orders]);
 
-  tg.onEvent("backButtonClicked", () => setCurrentPage("main"));
-  tg.onEvent("mainButtonClicked", () => setCurrentPage("payment"));
+  tg.onEvent("mainButtonClicked", () => navigate("/payment"));
+  tg.onEvent("backButtonClicked", () => navigate("/"));
 
   return (
     <div className={cls.wrapper}>
       <div className={cls.bigTitle}>
         <p className={cls.title}>Buyurtmangiz</p>
-        <div className={cls.btns}>
-          <p className={cls.editBtn} onClick={() => setShowBtns(true)}>
-            O&apos;zgartirish
-          </p>
-          <p className={cls.addBtn} onClick={() => setCurrentPage("main")}>
-            Qo&apos;shish
-          </p>
-        </div>
+        {!showBtns && (
+          <div className={cls.btns}>
+            <p className={cls.editBtn} onClick={() => setShowBtns(true)}>
+              O&apos;zgartirish
+            </p>
+          </div>
+        )}
       </div>
       {orders.map((order) => (
         <div className={cls.order} key={order.id}>
@@ -62,8 +62,12 @@ export default function Orders(props) {
             <p>{formatNumbers(order.count * order.price)} so&apos;m</p>
             {showBtns && (
               <div className={cls.buttons}>
-                <MinusButton onClick={() => addToCard(order.id, "minus")} />
-                <PlusButton onClick={() => addToCard(order.id, "plus")} />
+                <RectangeIconButton bgColor="#e64d44" onClick={() => addToCard(order.id, "minus")}>
+                  <Minus size={18} color="#fff" />
+                </RectangeIconButton>
+                <RectangeIconButton bgColor="#f8a917" onClick={() => addToCard(order.id, "plus")}>
+                  <Plus size={18} color="#fff" />
+                </RectangeIconButton>
               </div>
             )}
           </div>

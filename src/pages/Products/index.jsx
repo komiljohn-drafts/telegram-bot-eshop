@@ -1,76 +1,90 @@
 import { useEffect, useRef, useState } from "react";
 import { Minus, Plus, X } from "react-feather";
+import { useNavigate } from "react-router-dom";
 
 import { fakeData } from "./fakeData";
-import useCategoriesStore from "../../store/categories";
-import useTelegram from "../../hooks/useTelegram";
 import PictureUrl from "../../assets/osh.jpeg";
 import Product from "./Product";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import formatNumbers from "../../utils/formatNumbers";
 import RectangeIconButton from "../../components/Buttons/RectangeIconButton";
-import PrimaryButton from "../../components/Buttons/PrimaryButton";
+import useProductsStore from "../../store/categories";
+import useTelegram from "../../hooks/useTelegram";
 import cls from "./styles.module.scss";
 
-export default function Products(props) {
-  const { setCurrentPage } = props;
-  const [previewItem, setPreviewItem] = useState(null);
+export default function Products() {
+  const [previewItemId, setPreviewItemId] = useState(null);
 
-  const { categories, activeCategory } = useCategoriesStore((state) => state);
-  const { tg } = useTelegram();
+  const { products, activeCategory, addToCard, setProducts } = useProductsStore((state) => state);
   const ref = useRef(null);
+  const { tg } = useTelegram();
+  const navigate = useNavigate();
 
-  useOutsideClick(ref, () => setPreviewItem(null));
+  useOutsideClick(ref, () => setPreviewItemId(null));
 
   useEffect(() => {
-    if (categories.some((i) => i.count)) {
+    if (products.some((i) => i.count)) {
       tg.MainButton.text = "BUYURTMAGA O'TISH";
       tg.MainButton.show();
     } else if (tg.MainButton.isVisible) {
       tg.MainButton.hide();
     }
-  }, [tg, categories]);
+  }, [tg, products]);
 
-  tg.onEvent("mainButtonClicked", () => setCurrentPage("orders"));
-  // tg.onEvent("backButtonClicked", () => tg.close());
+  tg.onEvent("mainButtonClicked", () => navigate("orders"));
+  tg.onEvent("backButtonClicked", () => tg.close());
+
+  useEffect(() => {
+    setProducts(fakeData);
+  }, []);
 
   return (
     <div className={cls.products}>
       <p className={cls.bigTitle}>{activeCategory.title}</p>
       <div className={cls.inner}>
-        {fakeData.map((c) => (
-          <Product key={c.id} setPreviewItem={setPreviewItem} data={c} />
+        {products.map((c) => (
+          <Product key={c.id} setPreviewItemId={setPreviewItemId} data={c} />
         ))}
       </div>
-      {previewItem && (
+      {previewItemId && (
         <div className={cls.preview}>
           <div className={cls.inner} ref={ref}>
             <div className={cls.close}>
-              <X size={16} onClick={() => setPreviewItem(null)} />
+              <X size={16} onClick={() => setPreviewItemId(null)} />
             </div>
             <div className={cls.image}>
               <img src={PictureUrl} />
             </div>
             <div className={cls.body}>
               <div className={cls.head}>
-                <p className={cls.title}>{previewItem.title}</p>
-                <p className={cls.price}>{formatNumbers(previewItem.price)} so&apos;m</p>
+                <p className={cls.title}>{products.find((i) => i.id === previewItemId).title}</p>
+                <p className={cls.price}>
+                  {formatNumbers(products.find((i) => i.id === previewItemId).price)} so&apos;m
+                </p>
                 <p className={cls.description}>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis corporis inventore est neque eius.
                   Optio enim repudiandae dolor nulla deserunt.
                 </p>
               </div>
               <div className={cls.footer}>
+                {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
                 <div className={cls.action}>
-                  <RectangeIconButton>
-                    <Minus size={16} />
+                  <RectangeIconButton
+                    width="50%"
+                    bgColor="#e64d44"
+                    onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "minus")}
+                  >
+                    <Minus size={18} color="#fff" />
                   </RectangeIconButton>
-                  <span className={cls.price}>{3}</span>
-                  <RectangeIconButton>
-                    <Plus size={16} />
+                  <span className={cls.countPreview}>{products.find((i) => i.id === previewItemId).count}</span>
+                  <RectangeIconButton
+                    width="50%"
+                    bgColor="#f8a917"
+                    onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "plus")}
+                  >
+                    <Plus size={18} color="#fff" />
                   </RectangeIconButton>
                 </div>
-                <PrimaryButton>O&apos;chirish</PrimaryButton>
               </div>
             </div>
           </div>

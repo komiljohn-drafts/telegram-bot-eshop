@@ -17,10 +17,12 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    font-size: 14px;
+    white-space: nowrap;
     &.active {
       background-color: var(--tg-theme-hint-color);
       color: var(--tg-theme-bg-color);
-      border-radius: 8px;
+      border-radius: 4px;
     }
   }
 }

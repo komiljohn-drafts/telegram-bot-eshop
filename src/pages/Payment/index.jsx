@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Countdown from "react-countdown";
+import { useNavigate } from "react-router-dom";
 
 import NumberInput from "../../components/Buttons/NumberInput";
 import useTelegram from "../../hooks/useTelegram";
-import cls from "./styles.module.scss";
 import TextInput from "../../components/Buttons/TextInput";
-import useCategoriesStore from "../../store/categories";
+import useProductsStore from "../../store/categories";
+import cls from "./styles.module.scss";
 
-export default function Payment(props) {
-  const { setCurrentPage } = props;
-  const { tg, queryId, user } = useTelegram();
+export default function Payment() {
+  const navigate = useNavigate();
+  const { tg, queryId } = useTelegram();
   const form = useForm({ defaultValues: {} });
-  const { categories } = useCategoriesStore((state) => state);
+  const { products } = useProductsStore((state) => state);
 
   const [resendCode, setResendCode] = useState(false);
   const [phoneNumSent, setPhoneNumSent] = useState(false);
@@ -37,7 +38,7 @@ export default function Payment(props) {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
-        body: JSON.stringify({ registerData: values, categories, queryId }),
+        body: JSON.stringify({ registerData: values, products, queryId }),
       });
     } else {
       setPhoneNumSent(true);
@@ -47,7 +48,7 @@ export default function Payment(props) {
   };
 
   tg.onEvent("mainButtonClicked", () => form.handleSubmit(onSubmit)());
-  tg.onEvent("backButtonClicked", () => setCurrentPage("orders"));
+  tg.onEvent("backButtonClicked", () => navigate("orders"));
 
   const doubleTime = (str) => (String(str).length === 1 ? `0${str}` : str);
 
@@ -67,7 +68,6 @@ export default function Payment(props) {
 
   return (
     <div className={cls.wrapper}>
-      <div onClick={() => form.handleSubmit(onSubmit)()}>Submit`da endi</div>
       <p className={cls.title}>{phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH"}</p>
       <div className={cls.form}>
         <TextInput placeholder="Ismingizni kiriting" label="Ism" form={form} name="first_name" required />

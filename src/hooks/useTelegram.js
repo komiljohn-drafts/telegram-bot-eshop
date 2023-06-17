@@ -1,4 +1,5 @@
 export default function useTelegram() {
+  // const tg = {};
   const tg = window.Telegram.WebApp;
   return {
     tg,
