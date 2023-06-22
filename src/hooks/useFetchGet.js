@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import request from "../services/client";
 
 export default function useFetchGet(url) {
   const [data, setData] = useState([]);
@@ -6,8 +7,7 @@ export default function useFetchGet(url) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(url)
-      .then((res) => res.json())
+    request(url)
       .then((res) => {
         setData(res.data ?? []);
       })

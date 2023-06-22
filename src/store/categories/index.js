@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import request from "../../services/client";
 
 const useProductsStore = create(
   persist(
@@ -13,7 +14,7 @@ const useProductsStore = create(
           ),
         }),
       setProductsAsync: async () => {
-        const res = await fetch("http://botm.uz/v1/food");
+        const res = await request("/food");
         const data = await res.json();
         set({
           products: data,

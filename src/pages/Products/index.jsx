@@ -40,7 +40,7 @@ export default function Products() {
 
   return (
     <div className={cls.products}>
-      <p className={cls.bigTitle}>{activeCategory.title}</p>
+      <p className={cls.bigTitle}>{activeCategory.name}</p>
       <div className={cls.inner}>
         {products.map((c) => (
           <Product key={c.id} setPreviewItemId={setPreviewItemId} data={c} />
@@ -90,6 +90,9 @@ export default function Products() {
           </div>
         </div>
       )}
+      <a target="_blank" rel="noreferrer" href="tel:998990762359">
+        go go go
+      </a>
     </div>
   );
 }
