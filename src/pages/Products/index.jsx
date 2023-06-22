@@ -90,9 +90,7 @@ export default function Products() {
           </div>
         </div>
       )}
-      <a target="_blank" rel="noreferrer" href="tel:998990762359">
-        go go go
-      </a>
+      <div onClick={() => window.open("tel:998990762359", "_blank")}>998xxXXXxxXX</div>
     </div>
   );
 }
