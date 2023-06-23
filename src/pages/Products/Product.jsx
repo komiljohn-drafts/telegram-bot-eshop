@@ -25,11 +25,11 @@ export default function Product(props) {
         <p className={cls.title}>{data.title}</p>
         <p className={cls.price}>{formatNumbers(data.price)} so&apos;m</p>
         <div className={cls.footer}>
-          <RectangeIconButton size="sm" onClick={(e) => handleAddToCard(e, data.id, "minus")}>
+          <RectangeIconButton onClick={(e) => handleAddToCard(e, data.id, "minus")}>
             <Minus size={18} color="#14b706" />
           </RectangeIconButton>
           <span className={cls.count}>{data.count}</span>
-          <RectangeIconButton size="sm" onClick={(e) => handleAddToCard(e, data.id, "plus")}>
+          <RectangeIconButton onClick={(e) => handleAddToCard(e, data.id, "plus")}>
             <Plus size={18} color="#14b706" />
           </RectangeIconButton>
         </div>

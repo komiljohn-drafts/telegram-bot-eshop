@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Minus, Plus, X } from "react-feather";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import formatNumbers from "../../utils/formatNumbers";
 import RectangeIconButton from "../../components/Buttons/RectangeIconButton";
 import useProductsStore from "../../store/categories";
-import useTelegram from "../../hooks/useTelegram";
+import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import cls from "./styles.module.scss";
 
 export default function Products() {
@@ -17,26 +17,17 @@ export default function Products() {
 
   const { products, activeCategory, addToCard, setProducts } = useProductsStore((state) => state);
   const ref = useRef(null);
-  const { tg } = useTelegram();
   const navigate = useNavigate();
 
   useOutsideClick(ref, () => setPreviewItemId(null));
 
   useEffect(() => {
-    if (products.some((i) => i.count)) {
-      tg.MainButton.text = "BUYURTMAGA O'TISH";
-      tg.MainButton.show();
-    } else if (tg.MainButton.isVisible) {
-      tg.MainButton.hide();
-    }
-  }, [tg, products]);
-
-  tg.onEvent("mainButtonClicked", () => navigate("orders"));
-  tg.onEvent("backButtonClicked", () => tg.close());
-
-  useEffect(() => {
     setProducts(fakeData);
   }, []);
+
+  const totalPrice = useMemo(() => {
+    return products.filter((i) => i.count > 0).reduce((acc, cur) => acc + cur.count * cur.price, 0);
+  }, [products]);
 
   return (
     <div className={cls.products}>
@@ -70,14 +61,14 @@ export default function Products() {
                 {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
                 <div className={cls.action}>
                   <RectangeIconButton
-                    size="md"
+                    size="lg"
                     onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "minus")}
                   >
                     <Minus size={18} color="#14b706" />
                   </RectangeIconButton>
                   <span className={cls.countPreview}>{products.find((i) => i.id === previewItemId).count}</span>
                   <RectangeIconButton
-                    size="md"
+                    size="lg"
                     onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "plus")}
                   >
                     <Plus size={18} color="#14b706" />
@@ -88,6 +79,11 @@ export default function Products() {
           </div>
         </div>
       )}
+      <div className={cls.button}>
+        <PrimaryButton onClick={() => navigate("/orders")}>
+          To'lovga o'tish - {formatNumbers(totalPrice)} so'm
+        </PrimaryButton>
+      </div>
     </div>
   );
 }

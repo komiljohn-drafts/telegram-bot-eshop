@@ -1,16 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Minus, Plus } from "react-feather";
 
 import { FoodIcon } from "../../assets/icons.jsx";
 import formatNumbers from "../../utils/formatNumbers.js";
-import useTelegram from "../../hooks/useTelegram.js";
 import useProductsStore from "../../store/categories";
 import RectangeIconButton from "../../components/Buttons/RectangeIconButton/index.jsx";
+import PrimaryButton from "../../components/Buttons/PrimaryButton/index.jsx";
 import cls from "./styles.module.scss";
 
 export default function Orders() {
-  const { tg } = useTelegram();
   const navigate = useNavigate();
 
   const { products, addToCard } = useProductsStore((state) => state);
@@ -21,16 +20,9 @@ export default function Orders() {
     return products.filter((i) => i.count);
   }, [products]);
 
-  useEffect(() => {
-    tg.MainButton.text = `TO'LOVGA O'TISH - ${formatNumbers(
-      orders.reduce((acc, cur) => acc + cur.count * cur.price, 0)
-    )} so'm`;
-    tg.MainButton.show();
-    tg.BackButton.show();
-  }, [tg, products, orders]);
-
-  tg.onEvent("mainButtonClicked", () => navigate("/payment"));
-  tg.onEvent("backButtonClicked", () => navigate("/"));
+  const totalPrice = useMemo(() => {
+    return products.filter((i) => i.count > 0).reduce((acc, cur) => acc + cur.count * cur.price, 0);
+  }, [products]);
 
   return (
     <div className={cls.wrapper}>
@@ -62,11 +54,11 @@ export default function Orders() {
             <p>{formatNumbers(order.count * order.price)} so&apos;m</p>
             {showBtns && (
               <div className={cls.buttons}>
-                <RectangeIconButton bgColor="#e64d44" onClick={() => addToCard(order.id, "minus")}>
-                  <Minus size={18} color="#fff" />
+                <RectangeIconButton onClick={() => addToCard(order.id, "minus")}>
+                  <Minus size={18} color="#14b706" />
                 </RectangeIconButton>
-                <RectangeIconButton bgColor="#f8a917" onClick={() => addToCard(order.id, "plus")}>
-                  <Plus size={18} color="#fff" />
+                <RectangeIconButton onClick={() => addToCard(order.id, "plus")}>
+                  <Plus size={18} color="#14b706" />
                 </RectangeIconButton>
               </div>
             )}
@@ -76,6 +68,11 @@ export default function Orders() {
       <div className={cls.requestsBlock}>
         <textarea rows={1} placeholder="Komment..." />
         <p>Taklif, talab va shikoyatlar uchun</p>
+      </div>
+      <div className={cls.button}>
+        <PrimaryButton onClick={() => navigate("/payment")}>
+          To'lovga o'tish - {formatNumbers(totalPrice)} so'm
+        </PrimaryButton>
       </div>
     </div>
   );
