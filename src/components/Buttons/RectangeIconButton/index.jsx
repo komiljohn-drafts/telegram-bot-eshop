@@ -1,10 +1,10 @@
 import cls from "./styles.module.scss";
 
 export default function RectangeIconButton(props) {
-  const { children, bgColor = "#eee", width = "initial" } = props;
+  const { children, width = "initial", size = "sm" } = props;
 
   return (
-    <div className={cls.button} style={{ backgroundColor: bgColor, width }} {...props}>
+    <div className={`${cls.button} ${cls[size]}`} style={{ width }} {...props}>
       {children}
     </div>
   );

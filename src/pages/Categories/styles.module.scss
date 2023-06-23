@@ -5,10 +5,11 @@
   align-items: center;
   width: 100%;
   overflow-x: scroll;
-  border-bottom: 1px solid var(--tg-theme-hint-color);
   position: sticky;
   top: 0;
   background-color: var(--tg-theme-bg-color);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
   z-index: 10;
   .category {
     color: var(--tg-theme-text-color);
@@ -19,10 +20,10 @@
     gap: 4px;
     font-size: 14px;
     white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    border-radius: 8px;
     &.active {
-      background-color: var(--tg-theme-hint-color);
-      color: var(--tg-theme-bg-color);
-      border-radius: 4px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
   }
 }

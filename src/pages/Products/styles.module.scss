@@ -3,7 +3,7 @@
   .bigTitle {
     font-size: 20px;
     font-weight: 600;
-    margin: 8px 4px 20px;
+    margin: 8px 4px 8px;
     color: var(--tg-theme-text-color);
   }
   .inner {
@@ -11,15 +11,17 @@
     gap: 8px;
     flex-wrap: wrap;
     .product {
-      // border: 2px solid var(--tg-theme-hint-color);
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      padding: 12px;
+      background-color: #fff;
       margin: 6px;
-      border-radius: 4px;
+      border-radius: 16px;
       // border-bottom-right-radius: 32px;
       width: calc(50% - 17px);
-      overflow: hidden;
       .image {
+        overflow: hidden;
         height: 120px;
+        border-radius: 16px;
         img {
           width: 100%;
           height: 100%;
@@ -29,8 +31,9 @@
       .body {
         border-top: none;
         overflow: hidden;
-        padding: 8px;
         .title {
+          margin-top: 8px;
+          font-weight: 700;
           color: var(--tg-theme-text-color);
         }
         .price {
@@ -39,9 +42,10 @@
           font-weight: 700;
         }
         .footer {
-          margin-top: 20px;
+          margin-top: 10px;
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 4px;
           svg path {
             fill: blue;
@@ -69,7 +73,7 @@
       box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
       position: absolute;
       bottom: 0;
-      background-color: var(--tg-theme-bg-color);
+      background-color: #fff; // STATIC
       width: 100%;
       .image {
         height: 200px;
@@ -107,9 +111,9 @@
         .head {
           margin-bottom: 12px;
           .title {
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 8px;
+            padding-bottom: 8px;
             color: var(--tg-theme-text-color);
           }
           .price {
@@ -127,13 +131,12 @@
       .footer {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         .action {
           gap: 8px;
           padding: 4px;
-          width: fit-content;
           display: flex;
           align-items: center;
+          margin-inline: auto;
           width: 50%;
           .countPreview {
             color: var(--tg-theme-text-color);

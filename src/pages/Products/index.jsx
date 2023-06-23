@@ -70,19 +70,17 @@ export default function Products() {
                 {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
                 <div className={cls.action}>
                   <RectangeIconButton
-                    width="50%"
-                    bgColor="#e64d44"
+                    size="md"
                     onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "minus")}
                   >
-                    <Minus size={18} color="#fff" />
+                    <Minus size={18} color="#14b706" />
                   </RectangeIconButton>
                   <span className={cls.countPreview}>{products.find((i) => i.id === previewItemId).count}</span>
                   <RectangeIconButton
-                    width="50%"
-                    bgColor="#f8a917"
+                    size="md"
                     onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "plus")}
                   >
-                    <Plus size={18} color="#fff" />
+                    <Plus size={18} color="#14b706" />
                   </RectangeIconButton>
                 </div>
               </div>
@@ -90,7 +88,6 @@ export default function Products() {
           </div>
         </div>
       )}
-      <div onClick={() => window.open("tel:998990762359", "_blank")}>998xxXXXxxXX</div>
     </div>
   );
 }
