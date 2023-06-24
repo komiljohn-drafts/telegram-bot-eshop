@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Minus, Plus, X } from "react-feather";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { fakeData } from "./fakeData";
 import PictureUrl from "../../assets/osh.jpeg";
@@ -29,59 +30,79 @@ export default function Products() {
     return products.filter((i) => i.count > 0).reduce((acc, cur) => acc + cur.count * cur.price, 0);
   }, [products]);
 
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.1,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   return (
     <div className={cls.products}>
       <p className={cls.bigTitle}>{activeCategory.name}</p>
-      <div className={cls.inner}>
+      <motion.div className={cls.inner} variants={container} initial="hidden" animate="visible">
         {products.map((c) => (
           <Product key={c.id} setPreviewItemId={setPreviewItemId} data={c} />
         ))}
-      </div>
-      {previewItemId && (
-        <div className={cls.preview}>
-          <div className={cls.inner} ref={ref}>
-            <div className={cls.close}>
-              <X size={16} onClick={() => setPreviewItemId(null)} />
-            </div>
-            <div className={cls.image}>
-              <img src={PictureUrl} />
-            </div>
-            <div className={cls.body}>
-              <div className={cls.head}>
-                <p className={cls.title}>{products.find((i) => i.id === previewItemId).title}</p>
-                <p className={cls.price}>
-                  {formatNumbers(products.find((i) => i.id === previewItemId).price)} so&apos;m
-                </p>
-                <p className={cls.description}>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis corporis inventore est neque eius.
-                  Optio enim repudiandae dolor nulla deserunt.
-                </p>
+      </motion.div>
+      <AnimatePresence>
+        {previewItemId && (
+          <div className={cls.preview}>
+            <motion.div
+              className={cls.inner}
+              ref={ref}
+              initial={{ bottom: "-100%" }}
+              animate={{ bottom: "0%" }}
+              exit={{ bottom: "-100%" }}
+            >
+              <div className={cls.close}>
+                <X size={16} onClick={() => setPreviewItemId(null)} />
               </div>
-              <div className={cls.footer}>
-                {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
-                <div className={cls.action}>
-                  <RectangeIconButton
-                    size="lg"
-                    onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "minus")}
-                  >
-                    <Minus size={18} color="#14b706" />
-                  </RectangeIconButton>
-                  <span className={cls.countPreview}>{products.find((i) => i.id === previewItemId).count}</span>
-                  <RectangeIconButton
-                    size="lg"
-                    onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "plus")}
-                  >
-                    <Plus size={18} color="#14b706" />
-                  </RectangeIconButton>
+              <div className={cls.image}>
+                <img src={PictureUrl} />
+              </div>
+              <div className={cls.body}>
+                <div className={cls.head}>
+                  <p className={cls.title}>{products.find((i) => i.id === previewItemId).title}</p>
+                  <p className={cls.price}>
+                    {formatNumbers(products.find((i) => i.id === previewItemId).price)} so&apos;m
+                  </p>
+                  <p className={cls.description}>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis corporis inventore est neque
+                    eius. Optio enim repudiandae dolor nulla deserunt.
+                  </p>
+                </div>
+                <div className={cls.footer}>
+                  {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
+                  <div className={cls.action}>
+                    <RectangeIconButton
+                      size="lg"
+                      onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "minus")}
+                    >
+                      <Minus size={18} color="#14b706" />
+                    </RectangeIconButton>
+                    <span className={cls.countPreview}>{products.find((i) => i.id === previewItemId).count}</span>
+                    <RectangeIconButton
+                      size="lg"
+                      onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "plus")}
+                    >
+                      <Plus size={18} color="#14b706" />
+                    </RectangeIconButton>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
       <div className={cls.button}>
         <PrimaryButton onClick={() => navigate("/orders")}>
-          To'lovga o'tish - {formatNumbers(totalPrice)} so'm
+          Buyurtmaga o'tish - {formatNumbers(totalPrice)} so'm
         </PrimaryButton>
       </div>
     </div>

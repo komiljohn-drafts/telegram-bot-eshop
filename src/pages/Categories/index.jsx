@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 import Category from "./Category";
 import useCategoriesStore from "../../store/categories";
 import useFetchGet from "../../hooks/useFetchGet";
@@ -8,8 +10,20 @@ export default function Categories() {
 
   const [categories, isLoading] = useFetchGet("http://botm.uz/v1/tag");
 
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.1,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   return (
-    <div className={cls.categories}>
+    <motion.div className={cls.categories} variants={container} initial="hidden" animate="visible">
       {isLoading ? (
         <div>Getting data...</div>
       ) : categories.length ? (
@@ -24,6 +38,6 @@ export default function Categories() {
       ) : (
         <div>No categories found</div>
       )}
-    </div>
+    </motion.div>
   );
 }
