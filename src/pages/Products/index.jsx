@@ -42,6 +42,8 @@ export default function Products() {
     },
   };
 
+  const getCurrentItem = () => products.find((i) => i.id === previewItemId);
+
   return (
     <div className={cls.products}>
       <p className={cls.bigTitle}>{activeCategory.name}</p>
@@ -68,10 +70,8 @@ export default function Products() {
               </div>
               <div className={cls.body}>
                 <div className={cls.head}>
-                  <p className={cls.title}>{products.find((i) => i.id === previewItemId).title}</p>
-                  <p className={cls.price}>
-                    {formatNumbers(products.find((i) => i.id === previewItemId).price)} so&apos;m
-                  </p>
+                  <p className={cls.title}>{getCurrentItem().title}</p>
+                  <p className={cls.price}>{formatNumbers(getCurrentItem().price)} so&apos;m</p>
                   <p className={cls.description}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis corporis inventore est neque
                     eius. Optio enim repudiandae dolor nulla deserunt.
@@ -80,17 +80,18 @@ export default function Products() {
                 <div className={cls.footer}>
                   {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
                   <div className={cls.action}>
-                    <RectangeIconButton
-                      size="lg"
-                      onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "minus")}
-                    >
+                    <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "minus")}>
                       <Minus size={18} color="#14b706" />
                     </RectangeIconButton>
-                    <span className={cls.countPreview}>{products.find((i) => i.id === previewItemId).count}</span>
-                    <RectangeIconButton
-                      size="lg"
-                      onClick={() => addToCard(products.find((i) => i.id === previewItemId).id, "plus")}
+                    <motion.span
+                      key={getCurrentItem().count}
+                      className={cls.countPreview}
+                      animate={{ scale: 1, color: "#000" }}
+                      initial={{ scale: 1.2, color: "#14b706" }}
                     >
+                      {getCurrentItem().count}
+                    </motion.span>
+                    <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "plus")}>
                       <Plus size={18} color="#14b706" />
                     </RectangeIconButton>
                   </div>
