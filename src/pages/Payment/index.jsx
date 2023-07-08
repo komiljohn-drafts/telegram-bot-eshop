@@ -1,54 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
 
 import NumberInput from "../../components/Buttons/NumberInput";
-import useTelegram from "../../hooks/useTelegram";
 import TextInput from "../../components/Buttons/TextInput";
 import useProductsStore from "../../store/categories";
 import cls from "./styles.module.scss";
 
 export default function Payment() {
-  const navigate = useNavigate();
-  const { tg, queryId } = useTelegram();
   const form = useForm({ defaultValues: {} });
-  const { products } = useProductsStore((state) => state);
 
   const [resendCode, setResendCode] = useState(false);
   const [phoneNumSent, setPhoneNumSent] = useState(false);
   const [showCountDown, setShowCountDown] = useState(false);
-
-  useEffect(() => {
-    tg.MainButton.text = phoneNumSent ? "RO'YXATDAN O'TISH" : "KODNI OLISH";
-    tg.MainButton.show();
-    tg.BackButton.show();
-  }, [tg, phoneNumSent]);
-
-  const onSubmit = (values) => {
-    if (phoneNumSent) {
-      // to-do
-      setShowCountDown(false);
-      console.log("values => ", values);
-      console.log("tg info => ", tg.initDataUnsafe);
-
-      fetch("https://tubular-cocada-8aa0e4.netlify.app/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({ registerData: values, products, queryId }),
-      });
-    } else {
-      setPhoneNumSent(true);
-      setShowCountDown(true);
-      // to-do
-    }
-  };
-
-  tg.onEvent("mainButtonClicked", () => form.handleSubmit(onSubmit)());
-  tg.onEvent("backButtonClicked", () => navigate("orders"));
 
   const doubleTime = (str) => (String(str).length === 1 ? `0${str}` : str);
 
