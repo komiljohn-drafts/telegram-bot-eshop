@@ -12,6 +12,7 @@ import RectangeIconButton from "../../components/Buttons/RectangeIconButton";
 import useProductsStore from "../../store/categories";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import cls from "./styles.module.scss";
+import MainButton from "../../components/Buttons/MainButton";
 
 export default function Products() {
   const [previewItemId, setPreviewItemId] = useState(null);
@@ -101,11 +102,9 @@ export default function Products() {
           </div>
         )}
       </AnimatePresence>
-      <div className={cls.button}>
-        <PrimaryButton onClick={() => navigate("/orders")}>
-          Buyurtmaga o'tish - {formatNumbers(totalPrice)} so'm
-        </PrimaryButton>
-      </div>
+      <MainButton disabled={!(totalPrice > 0)} onClick={() => navigate("/orders")}>
+        Buyurtmaga o'tish - {formatNumbers(totalPrice)} so'm
+      </MainButton>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import { Minus, Plus } from "react-feather";
+import { motion } from "framer-motion";
 
 import PictureUrl from "../../assets/osh.jpeg";
 import formatNumbers from "../../utils/formatNumbers";
 import RectangeIconButton from "../../components/Buttons/RectangeIconButton";
 import useProductsStore from "../../store/categories";
 import cls from "./styles.module.scss";
-import { motion } from "framer-motion";
 
 export default function Product(props) {
   const { data, setPreviewItemId } = props;
