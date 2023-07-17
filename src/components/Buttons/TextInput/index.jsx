@@ -12,7 +12,7 @@ export default function TextInput({ name, placeholder, form, label, ...props }) 
           {...form.register(name, { required: "To'ldirilishi shart" })}
         />
       </div>
-      <p className={cls.errorText}>{form.formState.errors?.[name]?.message}</p>
+      {form.formState.errors?.[name] && <p className={cls.errorText}>{form.formState.errors?.[name]?.message}</p>}
     </div>
   );
 }
