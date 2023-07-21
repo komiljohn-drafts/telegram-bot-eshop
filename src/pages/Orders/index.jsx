@@ -7,9 +7,9 @@ import { FoodIcon } from "../../assets/icons.jsx";
 import formatNumbers from "../../utils/formatNumbers.js";
 import useProductsStore from "../../store/categories";
 import RectangeIconButton from "../../components/Buttons/RectangeIconButton/index.jsx";
-import cls from "./styles.module.scss";
 import MainButton from "../../components/Buttons/MainButton/index.jsx";
 import useTelegram from "../../hooks/useTelegram";
+import cls from "./styles.module.scss";
 
 export default function Orders() {
   const navigate = useNavigate();

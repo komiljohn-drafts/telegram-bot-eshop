@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
-import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
+import { GeolocationControl, Map, Placemark, YMaps, ZoomControl } from "@pbe/react-yandex-maps";
 import { MapPin, Truck, UserCheck } from "react-feather";
 
 import NumberInput from "../../components/Buttons/NumberInput";
@@ -17,10 +17,19 @@ export default function Payment() {
   const navigate = useNavigate();
 
   const [resendCode, setResendCode] = useState(false);
+  const [address, setAddress] = useState("");
+  const [ymaps, setYmaps] = useState(false);
+  const [selectedBranchId, setSelectedBranchId] = useState(null);
   const [phoneNumSent, setPhoneNumSent] = useState(false);
   const [showCountDown, setShowCountDown] = useState(false);
   const [activeTabId, setActiveTabId] = useState(1);
   const [placemark, setPlacemark] = useState([41.3488386, 69.3373077]);
+
+  // console.log(
+  //   ymaps.geocode(placemark).then((res) => {
+  //     console.log("res => ", res);
+  //   })
+  // );
 
   const doubleTime = (str) => (String(str).length === 1 ? `0${str}` : str);
 
@@ -97,53 +106,65 @@ export default function Payment() {
         <div className={cls.tabPanels}>
           {activeTabId === 1 ? (
             <div className={cls.map}>
-              <YMaps>
+              <YMaps query={{ apikey: "c98d40ff-b595-4324-ac0e-ac2159a1a918", load: "util.bounds" }}>
                 <div>
-                  My awesome application with maps!
+                  <p className={cls.selectAddress}>Yetkazib berish manzilini belgilang</p>
                   <Map
-                    width="364px"
-                    onClick={(e) => setPlacemark(e.get("coords"))}
-                    defaultState={{ center: placemark, zoom: 13 }}
+                    // options={{avoidFractionalZoom}}
+                    width="348px"
+                    onLoad={(ymaps) => setYmaps(ymaps)}
+                    onClick={(e) => {
+                      setAddress(e._sourceEvent.originalEvent.coords);
+                      console.log("e => ", e._sourceEvent);
+                      setPlacemark(e.get("coords"));
+                    }}
+                    modules={["geocode", "geolocation"]}
+                    options={{ suppressMapOpenBlock: true, controls: [] }}
+                    defaultState={{ center: placemark, zoom: 13, controls: [] }}
                   >
+                    <GeolocationControl
+                      // onLoad={(e) => console.log("e =< ", e)}
+                      options={{
+                        position: {
+                          top: 8,
+                          right: 8,
+                        },
+                        size: "40px",
+                      }}
+                    />
+                    <ZoomControl
+                      options={{
+                        position: {
+                          bottom: 50,
+                          right: 8,
+                        },
+                        size: "40px",
+                        width: "40px",
+                        height: "40px",
+                        cornerRadius: "50%",
+                      }}
+                    />
                     <Placemark geometry={placemark} />
                   </Map>
+                  <div className={cls.place}>{address}</div>
                 </div>
               </YMaps>
             </div>
           ) : (
             <div className={cls.branches}>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Chilonzor
-              </div>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Yunusobod
-              </div>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Mirzo Ulug'bek
-              </div>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Chorsu
-              </div>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Qo'yliq
-              </div>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Sergeli
-              </div>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Mirobod
-              </div>
-              <div className={cls.branch}>
-                <MapPin size={14} />
-                Yashnobod
-              </div>
+              <p className={cls.chooseBranch}>Filialni tanlang</p>
+              {branches.map((branch) => (
+                <div
+                  key={branch.id}
+                  className={`${cls.branch}`}
+                  onClick={() => {
+                    setSelectedBranchId(branch.id);
+                  }}
+                >
+                  <MapPin color={branch.id === selectedBranchId ? "#33b648" : "#000"} size={14} />
+                  {branch.name}
+                </div>
+              ))}
             </div>
           )}
         </div>
@@ -152,3 +173,34 @@ export default function Payment() {
     </div>
   );
 }
+
+const branches = [
+  {
+    id: 1,
+    name: "Chilonzor",
+  },
+  {
+    id: 2,
+    name: "Ahmad Donish",
+  },
+  {
+    id: 3,
+    name: "Zenit",
+  },
+  {
+    id: 4,
+    name: "Sayram",
+  },
+  {
+    id: 5,
+    name: "Universam",
+  },
+  {
+    id: 6,
+    name: "Oloy bozori",
+  },
+  {
+    id: 7,
+    name: "SamPI",
+  },
+];
