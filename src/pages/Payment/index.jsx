@@ -10,6 +10,7 @@ import TextInput from "../../components/Buttons/TextInput";
 import useTelegram from "../../hooks/useTelegram";
 import MainButton from "../../components/Buttons/MainButton";
 import cls from "./styles.module.scss";
+import { getGeoLocation } from "../../services/yandexSerive";
 
 export default function Payment() {
   const form = useForm({ defaultValues: {} });
@@ -46,6 +47,18 @@ export default function Payment() {
       </p>
     );
   };
+
+  useEffect(() => {
+    getGeoLocation({ lat: placemark[1], long: placemark[0] }).then((res) => {
+      if (res.response) {
+        setAddress(
+          res.response.GeoObjectCollection.featureMember[0].GeoObject.name
+          // " " +
+          // res.response.GeoObjectCollection.featureMember[1].GeoObject.description
+        );
+      }
+    });
+  }, [placemark]);
 
   useEffect(() => {
     function success(pos) {
@@ -132,7 +145,6 @@ export default function Payment() {
                     width="348px"
                     onLoad={(ymaps) => setYmaps(ymaps)}
                     onClick={(e) => {
-                      setAddress(e._sourceEvent.originalEvent.coords);
                       console.log("e => ", e._sourceEvent);
                       setPlacemark(e.get("coords"));
                     }}
