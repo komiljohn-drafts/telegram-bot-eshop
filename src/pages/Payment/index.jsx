@@ -48,6 +48,24 @@ export default function Payment() {
   };
 
   useEffect(() => {
+    function success(pos) {
+      const crd = pos.coords;
+
+      setPlacemark([crd.latitude, crd.longitude]);
+    }
+
+    function error(prop) {
+      console.log("ERROR => ", prop);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    });
+  }, []);
+
+  useEffect(() => {
     tg.BackButton.show();
   }, []);
 
