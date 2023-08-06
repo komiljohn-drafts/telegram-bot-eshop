@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 
 import Category from "./Category";
 import useCategoriesStore from "../../store/categories";
-import useFetchGet from "../../hooks/useFetchGet";
 import cls from "./styles.module.scss";
+import { fakeData } from "./fakeData";
 
 export default function Categories() {
   const { activeCategory, setActiveCategory } = useCategoriesStore((state) => state);
 
-  const [categories, isLoading] = useFetchGet("http://botm.uz/v1/tag");
+  // const [categories, isLoading] = useFetchGet("http://botm.uz/v1/tag");
 
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -24,10 +24,8 @@ export default function Categories() {
 
   return (
     <motion.div className={cls.categories} variants={container} initial="hidden" animate="visible">
-      {isLoading ? (
-        <div>Getting data...</div>
-      ) : categories.length ? (
-        categories.map((c) => (
+      {fakeData.length ? (
+        fakeData.map((c) => (
           <Category
             key={c.id}
             activeCategory={activeCategory.id === c.id}

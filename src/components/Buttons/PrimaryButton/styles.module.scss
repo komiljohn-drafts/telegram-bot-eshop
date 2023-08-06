@@ -8,12 +8,13 @@
   user-select: none;
   white-space: nowrap;
   color: #fff;
-  font-size: 13px;
-  line-height: 18px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 20px;
   vertical-align: middle;
   background-color: var(--primary-color);
   border-radius: 8px;
-  text-transform: uppercase;
   &.disabled {
     opacity: 0.7;
     cursor: not-allowed;
@@ -25,4 +26,3 @@
   //     background-color: #fcde1d !important;
   //   }
 }
-// e74d46

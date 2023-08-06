@@ -10,9 +10,8 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import formatNumbers from "../../utils/formatNumbers";
 import RectangeIconButton from "../../components/Buttons/RectangeIconButton";
 import useProductsStore from "../../store/categories";
-import PrimaryButton from "../../components/Buttons/PrimaryButton";
-import cls from "./styles.module.scss";
 import MainButton from "../../components/Buttons/MainButton";
+import cls from "./styles.module.scss";
 
 export default function Products() {
   const [previewItemId, setPreviewItemId] = useState(null);
@@ -71,8 +70,8 @@ export default function Products() {
               </div>
               <div className={cls.body}>
                 <div className={cls.head}>
-                  <p className={cls.title}>{getCurrentItem().title}</p>
                   <p className={cls.price}>{formatNumbers(getCurrentItem().price)} so&apos;m</p>
+                  <p className={cls.title}>{getCurrentItem().title}</p>
                   <p className={cls.description}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis corporis inventore est neque
                     eius. Optio enim repudiandae dolor nulla deserunt.
@@ -103,7 +102,11 @@ export default function Products() {
         )}
       </AnimatePresence>
       <MainButton disabled={!(totalPrice > 0)} onClick={() => navigate("/orders")}>
-        Buyurtmaga o'tish - {formatNumbers(totalPrice)} so'm
+        <span>Buyurtmaga o'tish</span>
+        <p>
+          <span className={cls.orderCount}>3</span>
+          <span>{formatNumbers(totalPrice)} so'm</span>
+        </p>
       </MainButton>
     </div>
   );

@@ -9,8 +9,8 @@ import NumberInput from "../../components/Buttons/NumberInput";
 import TextInput from "../../components/Buttons/TextInput";
 import useTelegram from "../../hooks/useTelegram";
 import MainButton from "../../components/Buttons/MainButton";
-import cls from "./styles.module.scss";
 import { getGeoLocation } from "../../services/yandexSerive";
+import cls from "./styles.module.scss";
 
 export default function Payment() {
   const form = useForm({ defaultValues: {} });
@@ -128,7 +128,7 @@ export default function Payment() {
                 className={`${cls.tab} ${tab.id === activeTabId ? cls.active : ""}`}
                 onClick={() => setActiveTabId(tab.id)}
               >
-                {tab.icon()}
+                {/* {tab.icon()} */}
                 {tab.text}
               </div>
             ))}
@@ -176,6 +176,7 @@ export default function Payment() {
                     />
                     <Placemark geometry={placemark} />
                   </Map>
+                  <p className={cls.adressP}>Manzil</p>
                   <div className={cls.place}>{address}</div>
                 </div>
               </YMaps>
@@ -199,7 +200,9 @@ export default function Payment() {
           )}
         </div>
       </div>
-      <MainButton onClick={() => navigate("/orders")}>Gazini bosish</MainButton>
+      <MainButton center onClick={() => navigate("/orders")}>
+        Gazini bosish
+      </MainButton>
     </div>
   );
 }

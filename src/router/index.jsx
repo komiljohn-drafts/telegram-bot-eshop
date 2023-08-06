@@ -2,6 +2,7 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Main from "../pages/Main";
 import Orders from "../pages/Orders";
 import Payment from "../pages/Payment";
+import MainLayout from "../components/Layouts/MainLayout";
 
 export default function Router() {
   return (
@@ -9,9 +10,9 @@ export default function Router() {
       <Route
         path="/"
         element={
-          <div>
+          <MainLayout>
             <Outlet />
-          </div>
+          </MainLayout>
         }
       >
         <Route index element={<Main />} />

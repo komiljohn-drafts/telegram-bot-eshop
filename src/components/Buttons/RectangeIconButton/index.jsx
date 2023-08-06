@@ -1,5 +1,6 @@
-import cls from "./styles.module.scss";
 import { motion } from "framer-motion";
+
+import cls from "./styles.module.scss";
 
 export default function RectangeIconButton(props) {
   const { children, width = "initial", size = "sm" } = props;

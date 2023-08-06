@@ -19,7 +19,7 @@ export default function Category(props) {
       className={`${cls.category} ${activeCategory ? cls.active : ""}`}
       onClick={() => setActiveCategory(data)}
     >
-      <img width={30} height={30} src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" />
+      {/* <img width={30} height={30} src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" /> */}
       <span>{data.name}</span>
     </motion.div>
   );

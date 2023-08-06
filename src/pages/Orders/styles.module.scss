@@ -1,6 +1,6 @@
 .wrapper {
   border-radius: 7px;
-  height: 100vh;
+  height: calc(100vh - 44px);
   .requestsBlock {
     margin-top: 14px;
     textarea {
@@ -41,15 +41,14 @@
         cursor: pointer;
       }
       .editBtn {
-        color: #33b648;
+        color: #f2271c;
       }
       .addBtn {
         color: #0096ff;
       }
     }
     .title {
-      text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 500;
       font-size: 17px;
       line-height: 21px;
       color: var(--tg-theme-text-color);
@@ -67,6 +66,11 @@
       display: flex;
       align-items: center;
       gap: 11px;
+      img {
+        border-radius: 8px;
+        width: 68px;
+        height: 68px;
+      }
       .text {
         user-select: none;
         color: var(--tg-theme-text-color);

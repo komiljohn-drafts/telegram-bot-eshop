@@ -31,22 +31,22 @@ export default function Product(props) {
         <img src={PictureUrl} />
       </div>
       <div className={cls.body}>
-        <p className={cls.title}>{data.title}</p>
         <p className={cls.price}>{formatNumbers(data.price)} so&apos;m</p>
+        <p className={cls.title}>{data.title}</p>
         <div className={cls.footer}>
-          <RectangeIconButton onClick={(e) => handleAddToCard(e, data.id, "minus")}>
-            <Minus size={18} color="#14b706" />
+          <RectangeIconButton size="lg" onClick={(e) => handleAddToCard(e, data.id, "minus")}>
+            <Minus size={18} />
           </RectangeIconButton>
           <motion.span
             key={data.count}
             className={cls.count}
             animate={{ scale: 1, color: "#000" }}
-            initial={{ scale: 1.2, color: "#14b706" }}
+            initial={{ scale: 1.2, color: "#1a5d1a" }}
           >
             {data.count}
           </motion.span>
-          <RectangeIconButton onClick={(e) => handleAddToCard(e, data.id, "plus")}>
-            <Plus size={18} color="#14b706" />
+          <RectangeIconButton size="lg" onClick={(e) => handleAddToCard(e, data.id, "plus")}>
+            <Plus size={18} />
           </RectangeIconButton>
         </div>
       </div>
