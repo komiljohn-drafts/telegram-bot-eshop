@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 import cls from "./styles.module.scss";
 
-export default function PrimaryButton({
+export default function SecondaryButton({
   size = "medium",
   center,
   children,
@@ -17,7 +17,7 @@ export default function PrimaryButton({
       style={{ justifyContent: center ? "center" : "space-between", ...styles }}
       whileTap={{ scale: 0.9 }}
       className={`${cls.button} ${disabled ? cls.disabled : ""} ${cls[size]} ${classes}`}
-      onClick={() => !disabled && onClick()}
+      onClick={(e) => !disabled && onClick(e)}
       {...props}
     >
       {children}

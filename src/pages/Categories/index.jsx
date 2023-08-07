@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 
 import Category from "./Category";
 import useCategoriesStore from "../../store/categories";
-import cls from "./styles.module.scss";
 import { fakeData } from "./fakeData";
+import cls from "./styles.module.scss";
 
 export default function Categories() {
   const { activeCategory, setActiveCategory } = useCategoriesStore((state) => state);

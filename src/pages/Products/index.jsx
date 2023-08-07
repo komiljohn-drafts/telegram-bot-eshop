@@ -17,6 +17,7 @@ export default function Products() {
   const [previewItemId, setPreviewItemId] = useState(null);
 
   const { products, activeCategory, addToCard, setProducts } = useProductsStore((state) => state);
+
   const ref = useRef(null);
   const navigate = useNavigate();
 
@@ -56,7 +57,7 @@ export default function Products() {
         {previewItemId && (
           <div className={cls.preview}>
             <motion.div
-              className={cls.inner}
+              className={cls.previewInner}
               ref={ref}
               initial={{ bottom: "-100%" }}
               animate={{ bottom: "0%" }}
@@ -81,7 +82,7 @@ export default function Products() {
                   {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
                   <div className={cls.action}>
                     <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "minus")}>
-                      <Minus size={18} color="#14b706" />
+                      <Minus size={18} />
                     </RectangeIconButton>
                     <motion.span
                       key={getCurrentItem().count}
@@ -92,7 +93,7 @@ export default function Products() {
                       {getCurrentItem().count}
                     </motion.span>
                     <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "plus")}>
-                      <Plus size={18} color="#14b706" />
+                      <Plus size={18} />
                     </RectangeIconButton>
                   </div>
                 </div>
@@ -101,7 +102,11 @@ export default function Products() {
           </div>
         )}
       </AnimatePresence>
-      <MainButton disabled={!(totalPrice > 0)} onClick={() => navigate("/orders")}>
+      <MainButton
+        styles={{ backgroundColor: previewItemId ? "#fff" : "" }}
+        disabled={!(totalPrice > 0)}
+        onClick={() => navigate("/orders")}
+      >
         <span>Buyurtmaga o'tish</span>
         <p>
           <span className={cls.orderCount}>3</span>
