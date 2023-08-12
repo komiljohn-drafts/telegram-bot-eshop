@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
 import { GeolocationControl, Map, Placemark, YMaps, ZoomControl } from "@pbe/react-yandex-maps";
-import { MapPin, Truck, UserCheck } from "react-feather";
+import { ArrowRight, MapPin, Truck, UserCheck } from "react-feather";
 
 import NumberInput from "../../components/Buttons/NumberInput";
 import TextInput from "../../components/Buttons/TextInput";
@@ -187,13 +187,15 @@ export default function Payment() {
               {branches.map((branch) => (
                 <div
                   key={branch.id}
-                  className={`${cls.branch}`}
+                  className={`${cls.branch} ${selectedBranchId === branch.id ? cls.active : ""}`}
                   onClick={() => {
                     setSelectedBranchId(branch.id);
                   }}
                 >
-                  <MapPin color={branch.id === selectedBranchId ? "#33b648" : "#000"} size={14} />
-                  {branch.name}
+                  <p className={cls.name}>{branch.name}</p>
+                  <p className={cls.address}>Bobur ko'ch. 174</p>
+                  <p className={cls.hours}>10:00 - 22:00</p>
+                  <ArrowRight className={cls.icon} />
                 </div>
               ))}
             </div>

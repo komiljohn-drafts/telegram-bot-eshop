@@ -36,20 +36,44 @@
     text-align: center;
     font-weight: 500;
     padding: 8px 0;
-    border-bottom: 1px solid #ddd;
+    font-size: 16px;
   }
   .branch {
     font-size: 14px;
-    display: flex;
-    align-items: center;
     gap: 4px;
     padding: 8px;
     cursor: pointer;
-    border-bottom: 1px solid #ddd;
+    position: relative;
+    .icon {
+      position: absolute;
+      right: 5px;
+      top: 38px;
+    }
+
+    .name {
+      color: var(--black-white-black, #000);
+      font-feature-settings: "clig" off, "liga" off;
+      font-family: Golos Text;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px; /* 155.556% */
+      letter-spacing: 0.35px;
+    }
+    .address,
+    .hours {
+      color: var(--mid-gray-mid-gray-1, #5b6871);
+      font-feature-settings: "clig" off, "liga" off;
+      font-family: Golos Text;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 153.846% */
+      letter-spacing: -0.24px;
+      margin-top: 8px;
+    }
     &.active {
-      svg {
-        fill: red;
-      }
+      background-color: #1a5d1a22;
     }
   }
 }
