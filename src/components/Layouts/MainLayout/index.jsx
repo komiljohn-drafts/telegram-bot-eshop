@@ -1,4 +1,3 @@
-import React from "react";
 import cls from "./styles.module.scss";
 
 export default function MainLayout({ children }) {

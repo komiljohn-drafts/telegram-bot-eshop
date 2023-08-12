@@ -24,6 +24,7 @@ export default function SearchBlock() {
       <div className={cls.busket}>
         <div className={cls.inner}>
           <ShoppingBag />
+          <span>3</span>
         </div>
       </div>
     </div>

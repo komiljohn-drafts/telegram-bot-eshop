@@ -45,6 +45,8 @@ export default function Products() {
 
   const getCurrentItem = () => products.find((i) => i.id === previewItemId);
 
+  const orderCount = products.filter((p) => p.count > 0).length;
+
   return (
     <div className={cls.products}>
       <p className={cls.bigTitle}>{activeCategory.name}</p>
@@ -109,7 +111,7 @@ export default function Products() {
       >
         <span>Buyurtmaga o'tish</span>
         <p>
-          <span className={cls.orderCount}>3</span>
+          <span className={cls.orderCount}>{orderCount}</span>
           <span>{formatNumbers(totalPrice)} so'm</span>
         </p>
       </MainButton>

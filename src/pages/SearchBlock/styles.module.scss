@@ -50,6 +50,21 @@
       align-items: center;
       justify-content: center;
       background-color: var(--tg-theme-secondary-bg-color);
+      position: relative;
+      span {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: var(--primary-color);
+        padding: 0px 6px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px; /* 133.333% */
+        letter-spacing: -0.41px;
+      }
     }
   }
 }
