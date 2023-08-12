@@ -12,6 +12,7 @@ import RectangeIconButton from "../../components/Buttons/RectangeIconButton";
 import useProductsStore from "../../store/categories";
 import MainButton from "../../components/Buttons/MainButton";
 import cls from "./styles.module.scss";
+import SecondaryButton from "../../components/Buttons/SecondaryButton";
 
 export default function Products() {
   const [previewItemId, setPreviewItemId] = useState(null);
@@ -46,6 +47,11 @@ export default function Products() {
   const getCurrentItem = () => products.find((i) => i.id === previewItemId);
 
   const orderCount = products.filter((p) => p.count > 0).length;
+
+  const handleAddToCard = (e, id, key) => {
+    e.stopPropagation();
+    addToCard(id, key);
+  };
 
   return (
     <div className={cls.products}>
@@ -83,20 +89,32 @@ export default function Products() {
                 <div className={cls.footer}>
                   {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
                   <div className={cls.action}>
-                    <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "minus")}>
-                      <Minus size={18} />
-                    </RectangeIconButton>
-                    <motion.span
-                      key={getCurrentItem().count}
-                      className={cls.countPreview}
-                      animate={{ scale: 1, color: "#000" }}
-                      initial={{ scale: 1.2, color: "#14b706" }}
-                    >
-                      {getCurrentItem().count}
-                    </motion.span>
-                    <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "plus")}>
-                      <Plus size={18} />
-                    </RectangeIconButton>
+                    {getCurrentItem().count > 0 ? (
+                      <>
+                        <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "minus")}>
+                          <Minus size={18} />
+                        </RectangeIconButton>
+                        <motion.span
+                          key={getCurrentItem().count}
+                          className={cls.countPreview}
+                          animate={{ scale: 1, color: "#000" }}
+                          initial={{ scale: 1.2, color: "#14b706" }}
+                        >
+                          {getCurrentItem().count}
+                        </motion.span>
+                        <RectangeIconButton size="lg" onClick={() => addToCard(getCurrentItem().id, "plus")}>
+                          <Plus size={18} />
+                        </RectangeIconButton>
+                      </>
+                    ) : (
+                      <SecondaryButton
+                        fullWidth
+                        onClick={(e) => handleAddToCard(e, getCurrentItem().id, "plus")}
+                        styles={{ backgroundColor: "#eee", color: "#000", fontWeight: "400" }}
+                      >
+                        Savatga
+                      </SecondaryButton>
+                    )}
                   </div>
                 </div>
               </div>

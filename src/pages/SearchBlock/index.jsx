@@ -15,6 +15,8 @@ export default function SearchBlock() {
     setProducts(products.filter((i) => i.title.toLowerCase().includes(e.target.value.toLowerCase())));
   };
 
+  const orderCount = products.filter((p) => p.count > 0).length;
+
   return (
     <div className={cls.wrapper}>
       <div className={cls.search}>
@@ -24,7 +26,7 @@ export default function SearchBlock() {
       <div className={cls.busket}>
         <div className={cls.inner}>
           <ShoppingBag />
-          <span>3</span>
+          <span>{orderCount}</span>
         </div>
       </div>
     </div>
