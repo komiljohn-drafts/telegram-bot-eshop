@@ -7,6 +7,7 @@ const useProductsStore = create(
   persist(
     (set, get) => ({
       products: [],
+      persistProducts: [],
       activeCategory: {},
       addToCard: (id, key) =>
         set({
@@ -23,7 +24,11 @@ const useProductsStore = create(
       },
       setProducts: (arr) =>
         set({
-          products: get().products.length ? get().products : [...arr],
+          products: arr,
+        }),
+      setPersistProducts: (arr) =>
+        set({
+          persistProducts: arr,
         }),
       setActiveCategory: (obj) => {
         set({

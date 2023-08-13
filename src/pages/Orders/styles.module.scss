@@ -1,6 +1,10 @@
 .wrapper {
   border-radius: 7px;
   height: calc(100vh - 44px);
+  .noOrder {
+    padding: 8px 21px;
+    color: var(--tg-theme-hint-color);
+  }
   .requestsBlock {
     margin-top: 14px;
     textarea {

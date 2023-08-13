@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { Search, ShoppingBag } from "react-feather";
 
-import cls from "./styles.module.scss";
 import useProductsStore from "../../store/categories";
+import cls from "./styles.module.scss";
 
 export default function SearchBlock() {
-  const { products, setProducts } = useProductsStore((state) => state);
+  const [products, persistProducts, setProducts] = useProductsStore((state) => [
+    state.products,
+    state.persistProducts,
+    state.setProducts,
+  ]);
 
   const [value, setValue] = useState("");
 
   const onChange = (e) => {
     setValue(e.target.value);
-    // console.log("products");
-    setProducts(products.filter((i) => i.title.toLowerCase().includes(e.target.value.toLowerCase())));
+
+    setProducts(persistProducts.filter((i) => i.title.toLowerCase().includes(e.target.value.toLowerCase())));
   };
 
   const orderCount = products.filter((p) => p.count > 0).length;

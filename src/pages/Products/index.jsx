@@ -17,7 +17,7 @@ import SecondaryButton from "../../components/Buttons/SecondaryButton";
 export default function Products() {
   const [previewItemId, setPreviewItemId] = useState(null);
 
-  const { products, activeCategory, addToCard, setProducts } = useProductsStore((state) => state);
+  const { products, activeCategory, addToCard, setProducts, setPersistProducts } = useProductsStore((state) => state);
 
   const ref = useRef(null);
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export default function Products() {
 
   useEffect(() => {
     setProducts(fakeData);
+    setPersistProducts(fakeData);
   }, []);
 
   const totalPrice = useMemo(() => {
