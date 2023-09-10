@@ -1,10 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import cls from "./styles.module.scss";
 
 export default function MainLayout({ children }) {
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className={cls.logo}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="103" height="24" viewBox="0 0 103 24" fill="none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="103"
+          height="24"
+          viewBox="0 0 103 24"
+          fill="none"
+          onClick={() => navigate("/")}
+        >
           <path
             d="M29.1476 23.5208C21.1505 21.4554 19.6843 10.0604 23.826 4.24119C26.3864 0.645319 31.2318 -0.743263 35.451 0.380447C39.4991 1.45867 42.2548 4.5141 43.0976 8.62901C44.9812 17.8381 39.1513 26.1027 29.1476 23.5208ZM31.5582 4.48199C26.9135 5.18565 26.1002 10.55 26.8547 14.5258C27.5048 17.9371 30.076 20.1952 33.7093 19.4701C38.3192 18.5498 38.9479 13.0944 38.1453 9.36745C37.4229 5.99899 35.0551 3.95224 31.5582 4.48199Z"
             fill="#131814"

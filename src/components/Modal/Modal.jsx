@@ -4,9 +4,11 @@ import SecondaryButton from "../Buttons/SecondaryButton";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import useProductsStore from "../../store/categories";
 import cls from "./styles.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function Modal({ setShowModal }) {
   const ref = useRef();
+  const navigate = useNavigate();
 
   const [products, setProducts] = useProductsStore((state) => [state.products, state.setProducts]);
 
@@ -15,6 +17,7 @@ export default function Modal({ setShowModal }) {
   const clearOrder = () => {
     setProducts(products.map((i) => ({ ...i, count: 0 })));
     setShowModal(false);
+    navigate("/");
   };
 
   return (
