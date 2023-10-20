@@ -25,6 +25,7 @@ export default function Payment() {
   const [showCountDown, setShowCountDown] = useState(false);
   const [activeTabId, setActiveTabId] = useState(1);
   const [placemark, setPlacemark] = useState([41.3488386, 69.3373077]);
+  const [currentPlace, setCurrentPlace] = useState(null);
 
   // console.log(
   //   ymaps.geocode(placemark).then((res) => {
@@ -96,6 +97,8 @@ export default function Payment() {
       icon: () => <UserCheck size={16} />,
     },
   ];
+
+  console.log("101", tg, navigator);
 
   return (
     <div className={cls.wrapper}>
@@ -180,6 +183,7 @@ export default function Payment() {
                   <div className={cls.place}>{address}</div>
                 </div>
               </YMaps>
+              <button>current location</button>
             </div>
           ) : (
             <div className={cls.branches}>
@@ -203,7 +207,7 @@ export default function Payment() {
         </div>
       </div>
       <MainButton center onClick={() => navigate("/orders")}>
-        Gazini bosish
+        Keyingi bosqich
       </MainButton>
     </div>
   );
