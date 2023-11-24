@@ -1,6 +1,7 @@
 .products {
   position: relative;
-  margin-bottom: 64px;
+  height: calc(100vh - 165px);
+  overflow-y: scroll;
   .orderCount {
     background: rgba(255, 255, 255, 0.25);
     border-radius: 12px;

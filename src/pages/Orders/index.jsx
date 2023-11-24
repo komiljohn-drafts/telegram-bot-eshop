@@ -16,11 +16,13 @@ export default function Orders() {
   const navigate = useNavigate();
   const { tg } = useTelegram();
 
+  const { products, addToCard } = useProductsStore((state) => state);
+
   const [dragXStart, setDragXStart] = useState(0);
   const [dragXEnd, setDragXEnd] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  const { products, addToCard } = useProductsStore((state) => state);
+  tg.onEvent("backButtonClicked", () => navigate("/"));
 
   const orders = useMemo(() => {
     return products.filter((i) => i.count);
@@ -39,8 +41,6 @@ export default function Orders() {
   useEffect(() => {
     tg.BackButton.show();
   }, []);
-
-  tg.onEvent("backButtonClicked", () => navigate("/"));
 
   return (
     <>
@@ -66,35 +66,38 @@ export default function Orders() {
                 </div>
               )}
             </div>
-            {orders.length > 0 ? (
-              orders.map((order) => (
-                <div className={cls.order} key={order.id}>
-                  <div className={cls.left}>
-                    <img src={PictureUrl} />
-                    <div className={cls.text}>
-                      <p className={cls.top}>
-                        <span className={cls.title}>{order.title}</span>
-                        <span className={cls.count}>{order.count}x</span>
-                      </p>
-                      <p className={cls.hint}>{order.description}</p>
+            <div className={cls.orders}>
+              {orders.length > 0 ? (
+                orders.map((order) => (
+                  <div className={cls.order} key={order.id}>
+                    <div className={cls.left}>
+                      <img src={PictureUrl} />
+                      <div className={cls.text}>
+                        <p className={cls.top}>
+                          <span className={cls.title}>{order.title}</span>
+                          <span className={cls.count}>{order.count}x</span>
+                        </p>
+                        <p className={cls.hint}>{order.description}</p>
+                      </div>
+                    </div>
+                    <div className={cls.right}>
+                      <p>{formatNumbers(order.count * order.price)} so&apos;m</p>
+                      <div className={cls.buttons}>
+                        <RectangeIconButton onClick={() => addToCard(order.id, "minus")}>
+                          <Minus size={18} />
+                        </RectangeIconButton>
+                        <RectangeIconButton onClick={() => addToCard(order.id, "plus")}>
+                          <Plus size={18} />
+                        </RectangeIconButton>
+                      </div>
                     </div>
                   </div>
-                  <div className={cls.right}>
-                    <p>{formatNumbers(order.count * order.price)} so&apos;m</p>
-                    <div className={cls.buttons}>
-                      <RectangeIconButton onClick={() => addToCard(order.id, "minus")}>
-                        <Minus size={18} />
-                      </RectangeIconButton>
-                      <RectangeIconButton onClick={() => addToCard(order.id, "plus")}>
-                        <Plus size={18} />
-                      </RectangeIconButton>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p className={cls.noOrder}>Buyurtma mavjud emas</p>
-            )}
+                ))
+              ) : (
+                <p className={cls.noOrder}>Buyurtma mavjud emas</p>
+              )}
+            </div>
+
             <div className={cls.requestsBlock}>
               <textarea rows={1} placeholder="Komment..." />
               <p>Taklif, talab va shikoyatlar uchun</p>

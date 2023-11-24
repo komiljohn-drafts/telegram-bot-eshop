@@ -11,24 +11,33 @@ import formatNumbers from "../../utils/formatNumbers";
 import RectangeIconButton from "../../components/Buttons/RectangeIconButton";
 import useProductsStore from "../../store/categories";
 import MainButton from "../../components/Buttons/MainButton";
-import cls from "./styles.module.scss";
 import SecondaryButton from "../../components/Buttons/SecondaryButton";
-import PrimaryButton from "../../components/Buttons/PrimaryButton";
+import cls from "./styles.module.scss";
 
 export default function Products() {
-  const [previewItemId, setPreviewItemId] = useState(null);
-
-  const { products, activeCategory, addToCard, setProducts, setPersistProducts } = useProductsStore((state) => state);
-
   const ref = useRef(null);
   const navigate = useNavigate();
+  const { products, activeCategory, addToCard, setProducts, setPersistProducts } = useProductsStore((state) => state);
 
   useOutsideClick(ref, () => setPreviewItemId(null));
 
+  const [previewItemId, setPreviewItemId] = useState(null);
+
+  const orderCount = products.filter((p) => p.count > 0).length;
+
+  const getCurrentItem = () => products.find((i) => i.id === previewItemId);
+
+  const handleAddToCard = (e, id, key) => {
+    e.stopPropagation();
+    addToCard(id, key);
+  };
+
   useEffect(() => {
-    setProducts(fakeData);
-    setPersistProducts(fakeData);
-  }, []);
+    if (!products.length) {
+      setProducts(fakeData);
+      setPersistProducts(fakeData);
+    }
+  }, [products]);
 
   const totalPrice = useMemo(() => {
     return products.filter((i) => i.count > 0).reduce((acc, cur) => acc + cur.count * cur.price, 0);
@@ -44,15 +53,6 @@ export default function Products() {
         staggerChildren: 0.1,
       },
     },
-  };
-
-  const getCurrentItem = () => products.find((i) => i.id === previewItemId);
-
-  const orderCount = products.filter((p) => p.count > 0).length;
-
-  const handleAddToCard = (e, id, key) => {
-    e.stopPropagation();
-    addToCard(id, key);
   };
 
   return (
@@ -79,7 +79,6 @@ export default function Products() {
               </div>
               <div className={cls.body}>
                 <div className={cls.head}>
-                  {/* <p className={cls.price}>{formatNumbers(getCurrentItem().price)} so&apos;m</p> */}
                   <p className={cls.title}>{getCurrentItem().title}</p>
                   <p className={cls.description}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis corporis inventore est neque
@@ -87,7 +86,6 @@ export default function Products() {
                   </p>
                 </div>
                 <div className={cls.footer}>
-                  {/* <PrimaryButton>O&apos;chirish</PrimaryButton> */}
                   <div className={cls.action}>
                     {getCurrentItem().count > 0 ? (
                       <>
@@ -116,11 +114,6 @@ export default function Products() {
                       </SecondaryButton>
                     )}
                   </div>
-                  {/* <PrimaryButton
-                  // styles={{ backgroundColor: previewItemId ? "#fff" : "" }}
-                  >
-                    Lorem ipsum dolor sit amet.
-                  </PrimaryButton> */}
                 </div>
               </div>
             </motion.div>

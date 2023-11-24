@@ -9,12 +9,15 @@ const useProductsStore = create(
       products: [],
       persistProducts: [],
       activeCategory: {},
-      addToCard: (id, key) =>
-        set({
-          products: get().products.map((i) =>
-            i.id === id ? { ...i, count: i.count >= 0 ? i.count + (key === "plus" ? 1 : -1) : 0 } : i
-          ),
-        }),
+      addToCard: (id, key) => {
+        const updated = get().products.map((i) =>
+          i.id === id ? { ...i, count: i.count >= 0 ? i.count + (key === "plus" ? 1 : -1) : 0 } : i
+        );
+        return set({
+          products: updated,
+          persistProducts: updated,
+        });
+      },
       setProductsAsync: async () => {
         const res = await request("/food");
         const data = await res.json();

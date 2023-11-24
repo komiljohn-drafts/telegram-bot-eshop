@@ -8,8 +8,6 @@ import cls from "./styles.module.scss";
 export default function Categories() {
   const { activeCategory, setActiveCategory } = useCategoriesStore((state) => state);
 
-  // const [categories, isLoading] = useFetchGet("http://botm.uz/v1/tag");
-
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {

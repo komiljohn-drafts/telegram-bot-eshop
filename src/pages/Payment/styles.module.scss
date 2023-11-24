@@ -1,8 +1,8 @@
 .wrapper {
   background-color: var(--tg-theme-secondary-bg-color);
-  margin-bottom: 64px;
-  height: 100vh;
-  padding: 8px 0;
+  height: calc(100vh - 60px);
+  padding-top: 8px;
+  overflow-y: scroll;
   .inner {
     background-color: #fff;
     border-radius: 4px;
@@ -31,7 +31,11 @@
   color: var(--tg-theme-hint-color);
   padding: 8px 4px;
 }
-.branches {
+.branchesWrapper {
+  .branches {
+    max-height: 340px;
+    overflow-y: scroll;
+  }
   .chooseBranch {
     text-align: center;
     font-weight: 500;
@@ -85,6 +89,8 @@
     background: #fff;
 
     .map {
+      height: 375px;
+      overflow-y: scroll;
       padding: 8px;
       .adressP {
         color: rgba(0, 0, 0, 0.68);
@@ -141,4 +147,13 @@
       }
     }
   }
+}
+.get_location_btn {
+  margin-top: 16px;
+  background-color: #eee;
+  color: rgba($color: #000000, $alpha: 0.68);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 22px; /* 129.412% */
+  letter-spacing: -0.41px;
 }
